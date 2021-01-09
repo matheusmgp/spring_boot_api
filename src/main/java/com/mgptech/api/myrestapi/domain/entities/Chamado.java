@@ -21,11 +21,6 @@ import org.springframework.stereotype.Component;
 public class Chamado extends BaseEntity implements Serializable{
 
 
-	/* @Id
-	 @GeneratedValue(strategy = GenerationType.IDENTITY)
-	 @Column(name = "id", unique = true, nullable = false)
-	 protected long id;*/
-
 	@Column(name = "protocolo", nullable = false)
     private String protocolo;
 
@@ -39,14 +34,6 @@ public class Chamado extends BaseEntity implements Serializable{
     private Filial filial;
 
     private Usuario usuario;
-
-
-    /*public Long getId() {
-    	return this.id;
-    }
-    public void setId(Long id) {
-    	this.id = id;
-    }*/
 
     public String getProtocolo() {
     	return this.protocolo;

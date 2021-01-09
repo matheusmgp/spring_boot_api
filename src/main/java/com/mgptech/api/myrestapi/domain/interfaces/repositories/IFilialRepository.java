@@ -10,7 +10,7 @@ import com.mgptech.api.myrestapi.domain.entities.Filial;
  * IFilialRepository
  */
 @Repository
-public interface IFilialRepository extends JpaRepository<Filial,Long> {
+public interface IFilialRepository extends IBaseRepository<Filial> {
 
     
 }

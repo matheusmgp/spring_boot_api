@@ -11,7 +11,7 @@ import com.mgptech.api.myrestapi.domain.entities.Usuario;
  * IUsuarioRepository
  */
 @Repository
-public interface IUsuarioRepository extends JpaRepository<Usuario,Long> {
+public interface IUsuarioRepository extends IBaseRepository<Usuario> {
 
     
 }

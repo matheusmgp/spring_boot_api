@@ -9,7 +9,7 @@ import com.mgptech.api.myrestapi.domain.entities.Chamado;
  * IChamadoRepository
  */
 @Repository
-public interface IChamadoRepository extends JpaRepository<Chamado,Long> {
+public interface IChamadoRepository extends IBaseRepository<Chamado> {
 
     
 }

@@ -7,11 +7,9 @@ import com.mgptech.api.myrestapi.domain.entities.Usuario;
 /**
  * UsuarioDto
  */
-public class UsuarioDto /*extends IdentityDto*/{
+public class UsuarioDto  extends IdentityDto {
 
-    @JsonProperty(defaultValue = "id")
-    private Long id;
-    
+
     @JsonProperty(defaultValue = "firstName")
     //@NotBlank(message = "Nome é requerido")
     private String firstName;
@@ -22,10 +20,6 @@ public class UsuarioDto /*extends IdentityDto*/{
     @JsonProperty(defaultValue = "acesso")
     private Boolean acesso;
 
-
-    public Long getId() {
-        return this.id;
-    }
 
     public String getFirstName() {
     	return this.firstName;

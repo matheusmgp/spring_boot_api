@@ -6,6 +6,7 @@ package com.mgptech.api.myrestapi.application.dto.output;
 import javax.validation.constraints.NotEmpty;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
 
@@ -17,7 +18,7 @@ import io.swagger.annotations.ApiModelProperty;
  *
  */
 @ApiModel(value = "ChamadoDtoOutput")
-public class ChamadoDtoOutput {
+public class ChamadoDtoOutput extends IdentityDto {
 
 	/**
 	 * 
@@ -25,10 +26,10 @@ public class ChamadoDtoOutput {
 	public ChamadoDtoOutput() {
 		// TODO Auto-generated constructor stub
 	}
-	 	@ApiModelProperty(required = true)
+	 	/*@ApiModelProperty(required = true)
 	    @NotEmpty
 	    private Long id;
-	 	
+	 	*/
 		@ApiModelProperty(required = true)
 		@NotEmpty
 	    private String protocolo;
@@ -48,12 +49,12 @@ public class ChamadoDtoOutput {
 	    private Usuario usuario;
 
 
-	public Long getId() {
+	/*public Long getId() {
 		return this.id;
 	}
 	public void setId(Long id) {
 		this.id = id;
-	}
+	}*/
 
 	public String getProtocolo() {
 	    	return this.protocolo;

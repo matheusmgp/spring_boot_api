@@ -13,21 +13,9 @@ import lombok.experimental.Accessors;
  */
 
 @Data
-public class ChamadoDto /*extends IdentityDto*/{
+public class ChamadoDto extends IdentityDto {
 
-    @JsonProperty(defaultValue = "id")
-    private Long id;
 
-    /**
-     * @return the id
-     */
-    public Long getId() {
-        return this.id;
-    }
-
-    /**
-     * @param id the id to set
-     */
 	
     @JsonProperty(defaultValue = "protocolo")
     private String protocolo;
