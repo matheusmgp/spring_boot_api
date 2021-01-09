@@ -5,7 +5,7 @@ import com.mgptech.api.myrestapi.domain.entities.Categoria;
 /**
  * ICategoriaService
  */
-public interface ICategoriaService extends IBaseService<CategoriaDto, Categoria> {
+public interface ICategoriaService {
 
 
     

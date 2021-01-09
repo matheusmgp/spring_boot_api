@@ -2,12 +2,27 @@ package com.mgptech.api.myrestapi.application.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.domain.entities.Chamado;
+import com.mgptech.api.myrestapi.domain.entities.Filial;
 
 /**
  * FilialDto
  */
-public class FilialDto extends IdentityDto{
+public class FilialDto /*extends IdentityDto*/{
 
+    @JsonProperty(defaultValue = "id")
+    private Long id;
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
+     * @param id the id to set
+     */
     @JsonProperty(defaultValue = "fantasia")
    // @NotBlank(message = "Nome fantasia é requerido")
     private String fantasia;

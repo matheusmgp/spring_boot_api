@@ -18,21 +18,21 @@ import org.springframework.stereotype.Component;
 @Table(name = "categoria")
 public class Categoria extends BaseEntity implements Serializable{
 
-    @Id
+   /* @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id", unique = true, nullable = false)
-    private Long id;
+    private Long id;*/
 
     @Column(name = "nome", nullable = false)
     private String nome;
 
 
-    public Long getId() {
+   /* public Long getId() {
     	return this.id;
     }
     public void setId(Long id) {
     	this.id = id;
-    }  
+    }*/
 
     public String getNome() {
     	return this.nome;

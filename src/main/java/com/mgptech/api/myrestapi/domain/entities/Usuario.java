@@ -18,10 +18,10 @@ import org.springframework.stereotype.Component;
 @Table(name = "usuario")
 public class Usuario extends BaseEntity implements Serializable{
 
-	@Id
+	/*@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", unique = true, nullable = false)
-    protected long id;
+    protected long id;*/
 
 	@Column(name = "first_name", nullable = false)
     private String firstName;    
@@ -32,12 +32,12 @@ public class Usuario extends BaseEntity implements Serializable{
     private Boolean acesso;
 
 
-    public Long getId() {
+    /*public Long getId() {
     	return this.id;
     }
     public void setId(Long id) {
     	this.id = id;
-    }  
+    }*/
 
   
     public String getFirstName() {

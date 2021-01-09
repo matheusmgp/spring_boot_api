@@ -1,21 +1,41 @@
 package com.mgptech.api.myrestapi.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
 
 /**
  * ChamadoDto
  */
-public class ChamadoDto extends IdentityDto{
 
-   
+@Data
+public class ChamadoDto /*extends IdentityDto*/{
+
+    @JsonProperty(defaultValue = "id")
+    private Long id;
+
+    /**
+     * @return the id
+     */
+    public Long getId() {
+        return this.id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+	
     @JsonProperty(defaultValue = "protocolo")
     private String protocolo;
 
     @JsonProperty(defaultValue = "dataAbertura")
     private String dataAbertura;
 
+    @JsonProperty(defaultValue = "dataFechamento")
     private String dataFechamento;
 
     @JsonProperty(defaultValue = "filial")

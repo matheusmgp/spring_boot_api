@@ -1,12 +1,17 @@
 package com.mgptech.api.myrestapi.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.domain.entities.Chamado;
+import com.mgptech.api.myrestapi.domain.entities.Usuario;
 
 /**
  * UsuarioDto
  */
-public class UsuarioDto extends IdentityDto{
+public class UsuarioDto /*extends IdentityDto*/{
 
+    @JsonProperty(defaultValue = "id")
+    private Long id;
+    
     @JsonProperty(defaultValue = "firstName")
     //@NotBlank(message = "Nome é requerido")
     private String firstName;
@@ -14,8 +19,13 @@ public class UsuarioDto extends IdentityDto{
     @JsonProperty(defaultValue = "lastName")
     //@NotBlank(message = "Sobrenome é requerido")
     private String lastName;
-   
+    @JsonProperty(defaultValue = "acesso")
     private Boolean acesso;
+
+
+    public Long getId() {
+        return this.id;
+    }
 
     public String getFirstName() {
     	return this.firstName;
