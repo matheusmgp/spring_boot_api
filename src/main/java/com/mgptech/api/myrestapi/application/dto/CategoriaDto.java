@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CategoriaDto extends IdentityDto {
 
 
-    @JsonProperty(defaultValue = "fantasia")
+    @JsonProperty(defaultValue = "nome")
     private String nome;
 
 
