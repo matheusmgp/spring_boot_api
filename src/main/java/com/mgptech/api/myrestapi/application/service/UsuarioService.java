@@ -3,6 +3,8 @@
  */
 package com.mgptech.api.myrestapi.application.service;
 
+import com.mgptech.api.myrestapi.domain.entities.Filial;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import com.mgptech.api.myrestapi.services.interfaces.IUsuarioService;
 
@@ -38,7 +40,12 @@ public class UsuarioService implements IUsuarioService {
     }
 
     public Usuario create(Usuario usuario) {
-        return  _usuarioRepository.save(usuario);
+        try {
+            Usuario savedUsuario =  _usuarioRepository.save(usuario);
+        }catch (RuntimeException ex) {
+            new EntityNotCreatedException("Could not create entity");
+        }
+        return usuario;
     }
 
     public void delete(Long id) {

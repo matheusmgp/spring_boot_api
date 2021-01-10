@@ -5,6 +5,7 @@ package com.mgptech.api.myrestapi.application.service;
 
 import java.util.List;
 
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,12 @@ public class FilialService implements IFilialService{
     }
 
     public Filial create(Filial filial) {
-        return  _filialRepository.save(filial);
+        try {
+            Filial savedFilial =  _filialRepository.save(filial);
+        }catch (RuntimeException ex) {
+            new EntityNotCreatedException("Could not create entity");
+        }
+        return filial;
     }
 
     public void delete(Long id) {
