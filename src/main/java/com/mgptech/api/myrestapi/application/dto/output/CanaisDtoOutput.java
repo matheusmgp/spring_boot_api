@@ -7,8 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
 
-@ApiModel(value = "CategoriaDtoOutput")
-public class CategoriaDtoOutput extends IdentityDto {
+@ApiModel(value = "CanaisDtoOutput")
+public class CanaisDtoOutput extends IdentityDto {
 
     @ApiModelProperty(required = true)
     @NotEmpty
@@ -18,19 +18,19 @@ public class CategoriaDtoOutput extends IdentityDto {
     @NotEmpty
     private Boolean status;
 
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
-    }
-
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 }

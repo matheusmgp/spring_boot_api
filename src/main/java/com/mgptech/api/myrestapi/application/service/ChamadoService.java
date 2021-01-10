@@ -50,8 +50,9 @@ public class ChamadoService  implements IChamadoService{
 
     }
 
-    public void delete(Long id) {
+    public Long delete(Long id) {
         _chamadoRepository.deleteById(id);
+        return id;
     }
 
     public Chamado update(Long id,Chamado newChamado) throws Exception {

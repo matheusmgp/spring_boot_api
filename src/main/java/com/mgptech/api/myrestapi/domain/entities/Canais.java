@@ -1,23 +1,16 @@
 package com.mgptech.api.myrestapi.domain.entities;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
-
 import java.io.Serializable;
-import org.springframework.stereotype.Component;
-/**
- * Categoria
- */
 
 @Entity
 @Component
-@Table(name = "categoria")
-public class Categoria extends BaseEntity implements Serializable{
-
+@Table(name = "canais")
+public class Canais  extends  BaseEntity implements Serializable {
 
 
     @Column(name = "nome", nullable = false)
@@ -25,6 +18,14 @@ public class Categoria extends BaseEntity implements Serializable{
 
     @Column(name = "status", nullable = false)
     private Boolean status;
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public Boolean getStatus() {
         return status;
@@ -34,11 +35,5 @@ public class Categoria extends BaseEntity implements Serializable{
         this.status = status;
     }
 
-    public String getNome() {
-    	return this.nome;
-    }
-    public void setNome(String nome) {
-    	this.nome = nome;
-    }  
 
 }

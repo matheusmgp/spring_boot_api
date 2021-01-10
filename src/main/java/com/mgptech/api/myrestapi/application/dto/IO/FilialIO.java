@@ -24,9 +24,9 @@ public class FilialIO {
 	        	filial.setCnpj(filialDto.getCnpj());
 	        	filial.setFantasia(filialDto.getFantasia());
 	        	filial.setRazao( filialDto.getRazao());
-				/*if(filialDto.getId() != null){
+				if(filialDto.getId() != null){
 					filial.setId(filialDto.getId());
-				}*/
+				}
 	        
 	            // @formatter:on
 	            return filial;

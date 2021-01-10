@@ -3,8 +3,11 @@ package com.mgptech.api.myrestapi.application.dto.output;
 import javax.validation.constraints.NotEmpty;
 
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
+import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+import java.util.List;
 
 @ApiModel(value = "UsuarioDtoOutput")
 public class UsuarioDtoOutput extends IdentityDto {
@@ -23,6 +26,13 @@ public class UsuarioDtoOutput extends IdentityDto {
     private String lastName;
    
     private Boolean acesso;
+
+
+    private List<Chamado> chamados;
+
+    public List<Chamado> getChamados() {
+        return chamados;
+    }
 
     public String getFirstName() {
     	return this.firstName;

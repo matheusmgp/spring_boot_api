@@ -25,7 +25,10 @@ public class CategoriaIO {
             // @formatter:off
             Categoria categoria = new Categoria();
             categoria.setNome(categoriaDto.getNome());
-
+            categoria.setStatus(categoriaDto.getStatus());
+            if(categoriaDto.getId() != null){
+                categoria.setId(categoriaDto.getId());
+            }
             return categoria;
         }
 
