@@ -5,6 +5,7 @@ package com.mgptech.api.myrestapi.application.service;
 
 import java.util.List;
 
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mgptech.api.myrestapi.application.dto.FilialDto;
@@ -39,7 +40,8 @@ public class FilialService implements IFilialService{
     }
 
     public Filial findById(Long id) {
-        return  _filialRepository.findById(id).get();
+        return  _filialRepository.findById(id) .orElseThrow(
+                () -> new EntityNotFoundException("ID not found "+ id));
     }
 
     public Filial create(Filial filial) {

@@ -3,6 +3,7 @@
  */
 package com.mgptech.api.myrestapi.application.service;
 
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import com.mgptech.api.myrestapi.services.interfaces.IUsuarioService;
 
 import java.util.List;
@@ -32,7 +33,8 @@ public class UsuarioService implements IUsuarioService {
     }
 
     public Usuario findById(Long id) {
-        return  _usuarioRepository.findById(id).get();
+        return  _usuarioRepository.findById(id) .orElseThrow(
+                () -> new EntityNotFoundException("ID not found "+ id));
     }
 
     public Usuario create(Usuario usuario) {

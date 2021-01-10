@@ -26,9 +26,9 @@ public class ChamadoIO {
 	            chamado.setDataFechamento(chamadoDto.getDataFechamento());
 	            chamado.setProtocolo(chamadoDto.getProtocolo());
 	            chamado.setUsuario( chamadoDto.getUsuario());
-	            if(chamadoDto.getId() != null){
+	           /* if(chamadoDto.getId() != null){
 					chamado.setId(chamadoDto.getId());
-				}
+				}*/
 
 	        
 	            // @formatter:on

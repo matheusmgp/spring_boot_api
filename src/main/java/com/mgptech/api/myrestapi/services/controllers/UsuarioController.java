@@ -5,6 +5,8 @@ import java.util.List;
 
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,34 +40,35 @@ public class UsuarioController {
     UsuarioIO usuarioIO;
 	
 	@RequestMapping(value = "/{id}",  method = RequestMethod.GET)
-	public UsuarioDtoOutput getById(@PathVariable(value = "id") long id){
-		  return objectMapperUtils.mapTo(_usuarioService.findById(id), UsuarioDtoOutput.class);
+	public ResponseEntity<UsuarioDtoOutput> getById(@PathVariable(value = "id") long id){
+		  UsuarioDtoOutput usuarioDtoOutput =  objectMapperUtils.mapTo(_usuarioService.findById(id), UsuarioDtoOutput.class);
+		return new ResponseEntity<>(usuarioDtoOutput, HttpStatus.OK);
 	}	
 	
     @RequestMapping( method =  RequestMethod.POST)
-    public Usuario add(@RequestBody UsuarioDto usuarioDTO){
+    public ResponseEntity<Usuario> add(@RequestBody UsuarioDto usuarioDTO){
     	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTO);
-    	Usuario savedModel = _usuarioService.create(usuarioModel);        
-        return savedModel;
+    	Usuario savedModel = _usuarioService.create(usuarioModel);
+		return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
     }
     
    
 
 	@RequestMapping(method = RequestMethod.GET)
-    public List<UsuarioDtoOutput> findAll(){
+    public ResponseEntity<List<UsuarioDtoOutput>> findAll(){
 		Type type = new TypeToken<List<UsuarioDtoOutput>>() {}.getType();
 
         List<UsuarioDtoOutput> result = objectMapperUtils.toList(_usuarioService.findAll(), type);
-    	 return result;	
+		return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public Usuario update(@RequestBody UsuarioDto usuarioDTO) throws Exception{
+    public ResponseEntity<Usuario> update(@RequestBody UsuarioDto usuarioDTO) throws Exception{
     	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTO);
     	 Long id = usuarioModel.getId();
-    	 Usuario savedUsuario = _usuarioService.update(id,usuarioModel);        
-         return savedUsuario;
+    	 Usuario savedUsuario = _usuarioService.update(id,usuarioModel);
+		return new ResponseEntity<>(savedUsuario, HttpStatus.OK);
     }
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") Long id){

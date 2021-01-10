@@ -4,6 +4,7 @@
 package com.mgptech.api.myrestapi.application.service;
 
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.IChamadoRepository;
@@ -33,7 +34,9 @@ public class ChamadoService  implements IChamadoService{
     }
 
     public Chamado findById(Long id) {
-        return  _chamadoRepository.findById(id).get();
+        return  _chamadoRepository.findById(id)
+                .orElseThrow(
+                   () -> new EntityNotFoundException("ID not found "+ id));
     }
 
     public Chamado create(Chamado chamado) {

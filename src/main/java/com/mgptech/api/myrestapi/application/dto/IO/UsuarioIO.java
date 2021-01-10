@@ -25,6 +25,10 @@ public class UsuarioIO {
 	        	usuario.setAcesso(usuarioDto.getAcesso());
 	        	usuario.setFirstName(usuarioDto.getFirstName());
 	        	usuario.setLastName( usuarioDto.getLastName());
+
+				/*if(usuarioDto.getId() != null){
+					usuario.setId(usuarioDto.getId());
+				}*/
 	        
 	            // @formatter:on
 	            return usuario;
