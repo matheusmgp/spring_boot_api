@@ -8,7 +8,7 @@ import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Component;
 
 @Component("pendencioIO")
-public class PendencioIO {
+public class PendenciaIO {
 
     private ModelMapper modelMapper;
 
@@ -33,7 +33,7 @@ public class PendencioIO {
 
 
     };
-    public PendencioIO() {
+    public PendenciaIO() {
         modelMapper = new ModelMapper();
         modelMapper.addConverter(userConverter);
     }

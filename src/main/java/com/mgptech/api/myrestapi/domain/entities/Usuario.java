@@ -24,7 +24,7 @@ public class Usuario extends BaseEntity implements Serializable{
     private String lastName;
 
     private Boolean acesso;
-    @JsonManagedReference
+   /* @JsonManagedReference
     @OneToMany(mappedBy = "usuario")
     private List<Chamado> chamados;
 
@@ -52,7 +52,7 @@ public class Usuario extends BaseEntity implements Serializable{
 
     public List<Chamado> getChamado() {
         return chamados;
-    }
+    }*/
     public String getFirstName() {
     	return this.firstName;
     }

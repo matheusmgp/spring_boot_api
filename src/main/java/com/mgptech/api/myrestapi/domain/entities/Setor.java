@@ -24,7 +24,7 @@ public class Setor extends  BaseEntity implements Serializable {
     private Boolean status;
 
 
-    @JsonManagedReference
+    /*@JsonManagedReference
     @OneToMany(mappedBy = "setor")
     private List<Chamado> chamados;
 
@@ -35,7 +35,7 @@ public class Setor extends  BaseEntity implements Serializable {
     public void setChamado(List<Chamado> chamado) {
         this.chamados = chamado;
     }
-
+*/
     public String getNome() {
         return nome;
     }

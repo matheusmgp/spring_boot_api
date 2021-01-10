@@ -24,6 +24,9 @@ public class PendenciaDto extends IdentityDto {
     @JsonProperty(defaultValue = "usuario_id")
     private Long usuario_id;
 
+    @JsonProperty(defaultValue = "chamado_id")
+    private Long chamado_id;
+
     @JsonProperty(defaultValue = "usuario_id_finish")
     private Long usuario_id_finish;
 
@@ -35,6 +38,14 @@ public class PendenciaDto extends IdentityDto {
 
     @JsonProperty(defaultValue = "canal_id")
     private Long canal_id;
+
+    public Long getChamado_id() {
+        return chamado_id;
+    }
+
+    public void setChamado_id(Long chamado_id) {
+        this.chamado_id = chamado_id;
+    }
 
     public String getDescricao() {
         return descricao;
@@ -115,4 +126,5 @@ public class PendenciaDto extends IdentityDto {
     public void setCanal_id(Long canal_id) {
         this.canal_id = canal_id;
     }
+
 }

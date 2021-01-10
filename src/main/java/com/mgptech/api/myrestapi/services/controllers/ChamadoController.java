@@ -114,7 +114,7 @@ public class ChamadoController {
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
     	  _chamadoService.delete(id);
-    	  return new ResponseEntity<String>("ID: "+id+" delatado.", HttpStatus.OK);
+    	  return new ResponseEntity<String>("ID: "+id+" deletado.", HttpStatus.OK);
     }
 	
 }

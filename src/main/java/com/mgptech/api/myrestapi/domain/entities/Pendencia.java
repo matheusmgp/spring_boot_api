@@ -43,7 +43,7 @@ public class Pendencia  extends BaseEntity implements Serializable {
     @JsonIgnore
     @JsonIgnoreProperties(ignoreUnknown=true)
     @JoinColumn(name = "usuario_id_finish")
-    private Usuario usuario_finish;
+    private Usuario usuario_id_finish;
 
     @ManyToOne()
     @JsonIgnore
@@ -120,11 +120,11 @@ public class Pendencia  extends BaseEntity implements Serializable {
     }
 
     public Usuario getUsuario_finish() {
-        return usuario_finish;
+        return usuario_id_finish;
     }
 
-    public void setUsuario_finish(Usuario usuario_finish) {
-        this.usuario_finish = usuario_finish;
+    public void setUsuario_finish(Usuario usuario_id_finish) {
+        this.usuario_id_finish = usuario_id_finish;
     }
 
     public Categoria getCategoria() {
