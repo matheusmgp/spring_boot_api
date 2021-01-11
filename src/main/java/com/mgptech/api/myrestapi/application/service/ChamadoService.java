@@ -41,12 +41,13 @@ public class ChamadoService  implements IChamadoService{
     }
 
     public Chamado create(Chamado chamado) {
+        Chamado savedChamado = new Chamado();
         try {
-            Chamado savedChamado =  _chamadoRepository.save(chamado);
+             savedChamado =  _chamadoRepository.save(chamado);
         }catch (RuntimeException ex) {
             new EntityNotCreatedException("Could not create entity");
         }
-        return chamado;
+        return savedChamado;
 
     }
 
