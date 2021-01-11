@@ -5,7 +5,7 @@ import com.mgptech.api.myrestapi.domain.entities.Chamado;
 
 import java.util.List;
 
-public interface IChamadoService  {
+public interface IChamadoService  extends IServiceBase<Chamado>{
 
     List<Chamado> getSetoresMesCount();
     List<Chamado> getSetoresDiaCount();

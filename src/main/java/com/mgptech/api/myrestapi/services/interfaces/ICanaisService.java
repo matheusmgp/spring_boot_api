@@ -1,4 +1,9 @@
 package com.mgptech.api.myrestapi.services.interfaces;
 
-public interface ICanaisService {
+
+import com.mgptech.api.myrestapi.domain.entities.Canais;
+
+public interface ICanaisService extends IServiceBase<Canais>{
+
+
 }

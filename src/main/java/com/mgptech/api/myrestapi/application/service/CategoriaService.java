@@ -42,8 +42,9 @@ public class CategoriaService implements ICategoriaService {
 
     }
 
-    public void delete(Long id) {
+    public Long delete(Long id) {
         _categoriaRepository.deleteById(id);
+        return id;
     }
 
     public Categoria update(Long id,Categoria newCategoria) throws Exception {

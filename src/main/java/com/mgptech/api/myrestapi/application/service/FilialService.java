@@ -54,8 +54,9 @@ public class FilialService implements IFilialService{
         return filial;
     }
 
-    public void delete(Long id) {
+    public Long delete(Long id) {
     	_filialRepository.deleteById(id);
+    	return id;
     }
 
     public Filial update(Long id,Filial newFilial) throws Exception {

@@ -40,8 +40,9 @@ public class SetorService implements ISetorService {
         return setor;
     }
 
-    public void delete(Long id) {
+    public Long delete(Long id) {
         _setorRepository.deleteById(id);
+        return id;
     }
 
     public Setor update(Long id,Setor newSetor) throws Exception {

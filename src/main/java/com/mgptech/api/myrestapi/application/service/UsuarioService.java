@@ -48,8 +48,9 @@ public class UsuarioService implements IUsuarioService {
         return usuario;
     }
 
-    public void delete(Long id) {
+    public Long delete(Long id) {
     	_usuarioRepository.deleteById(id);
+        return id;
     }
 
     public Usuario update(Long id,Usuario newUsuario) throws Exception {
