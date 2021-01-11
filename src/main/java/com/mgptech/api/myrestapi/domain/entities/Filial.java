@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Component
 @Table(name = "filial")
+@JsonIgnoreProperties(ignoreUnknown=true)
 public class Filial extends BaseEntity implements Serializable{
 
 
@@ -28,13 +29,13 @@ public class Filial extends BaseEntity implements Serializable{
     @Column(name = "cnpj", nullable = false)
     private String cnpj;
 
-    /*@JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "filial")
     private List<Chamado> chamados;
 
     public List<Chamado> getChamado() {
         return chamados;
-    }*/
+    }
     public String getFantasia() {
     	return this.fantasia;
     }

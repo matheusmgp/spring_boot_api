@@ -9,6 +9,7 @@ import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.springframework.stereotype.Component;
 
 /**
@@ -18,21 +19,16 @@ import org.springframework.stereotype.Component;
  @Entity
  @Component
  @Table(name = "chamado")
- @JsonIgnoreProperties({"filial","usuario","setor"})
+ @JsonIgnoreProperties(ignoreUnknown=true)
 public class Chamado extends BaseEntity implements Serializable{
 
 
-	@Column(name = "protocolo", nullable = false)
+    @Column(name = "protocolo", nullable = false)
     private String protocolo;
 
-   // @Column(name = "data_abertura", nullable = false)
-    //private String dataAbertura;
-     @Basic
-     @Temporal(TemporalType.TIMESTAMP)
-     private java.util.Date dataAbertura;
-
-   // @Column(name = "data_fechamento", nullable = true)
-    //private String dataFechamento;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date dataAbertura;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
@@ -71,7 +67,7 @@ public class Chamado extends BaseEntity implements Serializable{
     @JoinColumn(name = "setor_id")
     private Setor setor;
 
-    /*@JsonManagedReference
+    @JsonManagedReference
     @OneToMany(mappedBy = "chamado")
     private List<Pendencia> pendencias;
 
@@ -82,7 +78,7 @@ public class Chamado extends BaseEntity implements Serializable{
     public void setPendencias(List<Pendencia> pendencias) {
         this.pendencias = pendencias;
     }
-*/
+
 
     public Setor getSetor() {
         return setor;

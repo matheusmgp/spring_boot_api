@@ -68,4 +68,59 @@ public class ChamadoService  implements IChamadoService{
         Chamado chamadoDB = _chamadoRepository.save(newChamado);
         return chamadoDB;
     }
+
+    @Override
+    public List<Chamado> getSetoresMesCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getSetoresDiaCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getEncerradosMesCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getSEncerradosDiaCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getEncerradosUsersMesCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getEncerradosUsersDiaCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getEncerradosAtrasadosMesCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getEncerradosAtrasadosDiaCount() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getChamadosCountHoje() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getChamadosCountMes() {
+        return null;
+    }
+
+    @Override
+    public List<Chamado> getHistoricoById() {
+        return null;
+    }
 }
