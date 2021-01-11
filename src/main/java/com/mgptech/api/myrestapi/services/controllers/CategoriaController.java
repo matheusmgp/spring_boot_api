@@ -1,13 +1,10 @@
 package com.mgptech.api.myrestapi.services.controllers;
 
 import com.mgptech.api.myrestapi.application.dto.CategoriaDto;
-import com.mgptech.api.myrestapi.application.dto.ChamadoDto;
 import com.mgptech.api.myrestapi.application.dto.IO.CategoriaIO;
-import com.mgptech.api.myrestapi.application.dto.output.CategoriaDtoOutput;
-import com.mgptech.api.myrestapi.application.dto.output.ChamadoDtoOutput;
+import com.mgptech.api.myrestapi.application.dto.response.CategoriaDtoResponse;
 import com.mgptech.api.myrestapi.application.service.CategoriaService;
 import com.mgptech.api.myrestapi.domain.entities.Categoria;
-import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +32,10 @@ public class CategoriaController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<CategoriaDtoOutput> getById(@PathVariable(value = "id") long id){
-        CategoriaDtoOutput categoriaDtoOutput = objectMapperUtils.mapTo(_categoriaService.findById(id), CategoriaDtoOutput.class);
+    public ResponseEntity<CategoriaDtoResponse> getById(@PathVariable(value = "id") long id){
+        CategoriaDtoResponse categoriaDtoResponse = objectMapperUtils.mapTo(_categoriaService.findById(id), CategoriaDtoResponse.class);
         // return ResponseEntity.ok(chamadoDtoOutput);
-        return new ResponseEntity<>(categoriaDtoOutput, HttpStatus.OK);
+        return new ResponseEntity<>(categoriaDtoResponse, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.POST)
@@ -51,11 +48,11 @@ public class CategoriaController {
 
 
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<CategoriaDtoOutput>> findAll(){
-        Type type = new TypeToken<List<CategoriaDtoOutput>>() {}.getType();
+    public ResponseEntity<List<CategoriaDtoResponse>> findAll(){
+        Type type = new TypeToken<List<CategoriaDtoResponse>>() {}.getType();
 
-        List<CategoriaDtoOutput> result = objectMapperUtils.toList(_categoriaService.findAll(), type);
-        return new ResponseEntity<List<CategoriaDtoOutput>>(result, HttpStatus.OK);
+        List<CategoriaDtoResponse> result = objectMapperUtils.toList(_categoriaService.findAll(), type);
+        return new ResponseEntity<List<CategoriaDtoResponse>>(result, HttpStatus.OK);
     }
 
 

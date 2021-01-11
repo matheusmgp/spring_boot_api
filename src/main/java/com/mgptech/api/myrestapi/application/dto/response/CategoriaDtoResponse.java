@@ -1,4 +1,4 @@
-package com.mgptech.api.myrestapi.application.dto.output;
+package com.mgptech.api.myrestapi.application.dto.response;
 
 
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
@@ -7,8 +7,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
 
-@ApiModel(value = "CategoriaDtoOutput")
-public class CategoriaDtoOutput extends IdentityDto {
+@ApiModel(value = "CategoriaDtoResponse")
+public class CategoriaDtoResponse extends IdentityDto {
 
     @ApiModelProperty(required = true)
     @NotEmpty

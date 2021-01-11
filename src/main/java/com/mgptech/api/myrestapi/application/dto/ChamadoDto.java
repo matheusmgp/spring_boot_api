@@ -9,6 +9,14 @@ import com.mgptech.api.myrestapi.domain.entities.Usuario;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Basic;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import java.util.Date;
+
 /**
  * ChamadoDto
  */
@@ -19,13 +27,19 @@ public class ChamadoDto extends IdentityDto {
 
 	
     @JsonProperty(defaultValue = "protocolo")
+    @NotBlank(message = "Protocolo é obrigatório.")
     private String protocolo;
 
     @JsonProperty(defaultValue = "dataAbertura")
-    private String dataAbertura;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date dataAbertura;
 
     @JsonProperty(defaultValue = "dataFechamento")
-    private String dataFechamento;
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date dataFechamento;
+
 
     @JsonProperty(defaultValue = "filial")
     private Long filial;
@@ -101,22 +115,19 @@ public class ChamadoDto extends IdentityDto {
     	this.protocolo = protocolo;
     }
 
-
-    public String getDataAbertura() {
-    	return this.dataAbertura;
-    }
-    public void setDataAbertura(String dataAbertura) {
-    	this.dataAbertura = dataAbertura;
+    public Date getDataAbertura() {
+        return dataAbertura;
     }
 
-
-    public String getDataFechamento() {
-    	return this.dataFechamento;
-    }
-    public void setDataFechamento(String dataFechamento) {
-    	this.dataFechamento = dataFechamento;
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
     }
 
+    public Date getDataFechamento() {
+        return dataFechamento;
+    }
 
-
+    public void setDataFechamento(Date dataFechamento) {
+        this.dataFechamento = dataFechamento;
+    }
 }

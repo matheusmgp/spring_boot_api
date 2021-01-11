@@ -2,6 +2,7 @@ package com.mgptech.api.myrestapi.services.controllers;
 
 import java.util.List;
 
+import com.mgptech.api.myrestapi.application.dto.response.ChamadoDtoResponse;
 import com.mgptech.api.myrestapi.application.service.FilialService;
 import com.mgptech.api.myrestapi.application.service.SetorService;
 import com.mgptech.api.myrestapi.application.service.UsuarioService;
@@ -22,7 +23,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.mgptech.api.myrestapi.application.dto.ChamadoDto;
 import com.mgptech.api.myrestapi.application.dto.IO.ChamadoIO;
-import com.mgptech.api.myrestapi.application.dto.output.ChamadoDtoOutput;
 import com.mgptech.api.myrestapi.application.service.ChamadoService;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
@@ -50,16 +50,16 @@ public class ChamadoController {
     ChamadoIO chamadoIO;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<ChamadoDtoOutput> getById(@PathVariable(value = "id") long id){
-        ChamadoDtoOutput chamadoDtoOutput = objectMapperUtils.mapTo(_chamadoService.findById(id), ChamadoDtoOutput.class);
-        return new ResponseEntity<>(chamadoDtoOutput, HttpStatus.OK);
+	public ResponseEntity<ChamadoDtoResponse> getById(@PathVariable(value = "id") long id){
+        ChamadoDtoResponse chamadoDtoResponse = objectMapperUtils.mapTo(_chamadoService.findById(id), ChamadoDtoResponse.class);
+        return new ResponseEntity<>(chamadoDtoResponse, HttpStatus.OK);
 	}
 
 	@RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<ChamadoDtoOutput>> findAll(){
-        Type type = new TypeToken<List<ChamadoDtoOutput>>() {}.getType();
-        List<ChamadoDtoOutput> result = objectMapperUtils.toList(_chamadoService.findAll(), type);
-        return new ResponseEntity<List<ChamadoDtoOutput>>(result, HttpStatus.OK);
+    public ResponseEntity<List<ChamadoDtoResponse>> findAll(){
+        Type type = new TypeToken<List<ChamadoDtoResponse>>() {}.getType();
+        List<ChamadoDtoResponse> result = objectMapperUtils.toList(_chamadoService.findAll(), type);
+        return new ResponseEntity<List<ChamadoDtoResponse>>(result, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.POST)

@@ -3,6 +3,7 @@ package com.mgptech.api.myrestapi.services.controllers;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import com.mgptech.api.myrestapi.application.dto.response.FilialDtoResponse;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,15 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mgptech.api.myrestapi.application.dto.ChamadoDto;
 import com.mgptech.api.myrestapi.application.dto.FilialDto;
-import com.mgptech.api.myrestapi.application.dto.IO.ChamadoIO;
 import com.mgptech.api.myrestapi.application.dto.IO.FilialIO;
-import com.mgptech.api.myrestapi.application.dto.output.ChamadoDtoOutput;
-import com.mgptech.api.myrestapi.application.dto.output.FilialDtoOutput;
-import com.mgptech.api.myrestapi.application.service.ChamadoService;
 import com.mgptech.api.myrestapi.application.service.FilialService;
-import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 
@@ -40,9 +35,9 @@ public class FilialController {
     FilialIO filialIO;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public ResponseEntity<FilialDtoOutput> getById(@PathVariable(value = "id") long id){
-		FilialDtoOutput filialDtoOutput = objectMapperUtils.mapTo(_filialService.findById(id), FilialDtoOutput.class);
-		return new ResponseEntity<>(filialDtoOutput, HttpStatus.OK);
+	public ResponseEntity<FilialDtoResponse> getById(@PathVariable(value = "id") long id){
+		FilialDtoResponse filialDtoResponse = objectMapperUtils.mapTo(_filialService.findById(id), FilialDtoResponse.class);
+		return new ResponseEntity<>(filialDtoResponse, HttpStatus.OK);
 	}	
 	
     @RequestMapping( method =  RequestMethod.POST)
@@ -55,10 +50,10 @@ public class FilialController {
    
 
 	@RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<FilialDtoOutput>> findAll(){
-		Type type = new TypeToken<List<FilialDtoOutput>>() {}.getType();
+    public ResponseEntity<List<FilialDtoResponse>> findAll(){
+		Type type = new TypeToken<List<FilialDtoResponse>>() {}.getType();
 
-        List<FilialDtoOutput> result = objectMapperUtils.toList(_filialService.findAll(), type);
+        List<FilialDtoResponse> result = objectMapperUtils.toList(_filialService.findAll(), type);
 		return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

@@ -1,7 +1,6 @@
-package com.mgptech.api.myrestapi.application.dto.output;
+package com.mgptech.api.myrestapi.application.dto.response;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mgptech.api.myrestapi.domain.entities.Canais;
 import com.mgptech.api.myrestapi.domain.entities.Categoria;
 import com.mgptech.api.myrestapi.domain.entities.SubCategoria;
@@ -11,8 +10,8 @@ import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
 
-@ApiModel(value = "PendenciaDtoOutput")
-public class PendenciaDtoOutput {
+@ApiModel(value = "PendenciaDtoResponse")
+public class PendenciaDtoResponse {
 
     @ApiModelProperty(required = true)
     @NotEmpty

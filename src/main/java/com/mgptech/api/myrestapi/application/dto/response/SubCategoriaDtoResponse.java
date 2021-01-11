@@ -1,15 +1,14 @@
-package com.mgptech.api.myrestapi.application.dto.output;
+package com.mgptech.api.myrestapi.application.dto.response;
 
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 import com.mgptech.api.myrestapi.domain.entities.Categoria;
-import com.mgptech.api.myrestapi.domain.entities.Filial;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.validation.constraints.NotEmpty;
 
-@ApiModel(value = "SubCategoriaDtoOutput")
-public class SubCategoriaDtoOutput extends IdentityDto {
+@ApiModel(value = "SubCategoriaDtoResponse")
+public class SubCategoriaDtoResponse extends IdentityDto {
 
     @ApiModelProperty(required = true)
     @NotEmpty

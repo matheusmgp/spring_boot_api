@@ -1,15 +1,10 @@
 package com.mgptech.api.myrestapi.services.controllers;
 
 
-import com.mgptech.api.myrestapi.application.dto.CategoriaDto;
-import com.mgptech.api.myrestapi.application.dto.IO.CategoriaIO;
 import com.mgptech.api.myrestapi.application.dto.IO.SetorIO;
 import com.mgptech.api.myrestapi.application.dto.SetorDto;
-import com.mgptech.api.myrestapi.application.dto.output.CategoriaDtoOutput;
-import com.mgptech.api.myrestapi.application.dto.output.SetorDtoOutput;
-import com.mgptech.api.myrestapi.application.service.CategoriaService;
+import com.mgptech.api.myrestapi.application.dto.response.SetorDtoResponse;
 import com.mgptech.api.myrestapi.application.service.SetorService;
-import com.mgptech.api.myrestapi.domain.entities.Categoria;
 import com.mgptech.api.myrestapi.domain.entities.Setor;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 import org.modelmapper.TypeToken;
@@ -18,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -35,14 +31,14 @@ public class SetorController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<SetorDtoOutput> getById(@PathVariable(value = "id") long id){
-        SetorDtoOutput setorDtoOutput = objectMapperUtils.mapTo(_setorService.findById(id), SetorDtoOutput.class);
+    public ResponseEntity<SetorDtoResponse> getById(@PathVariable(value = "id") long id){
+        SetorDtoResponse setorDtoResponse = objectMapperUtils.mapTo(_setorService.findById(id), SetorDtoResponse.class);
         // return ResponseEntity.ok(chamadoDtoOutput);
-        return new ResponseEntity<>(setorDtoOutput, HttpStatus.OK);
+        return new ResponseEntity<>(setorDtoResponse, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Setor> add(@RequestBody SetorDto setorDto){
+    public ResponseEntity<Setor> add( @Valid @ModelAttribute("SetorDto") @RequestBody SetorDto setorDto){
         Setor setorModel = setorIO.mapTo(setorDto);
         Setor savedSetor = _setorService.create(setorModel);
         return new ResponseEntity<Setor>(savedSetor, HttpStatus.CREATED);
@@ -51,11 +47,11 @@ public class SetorController {
 
 
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<SetorDtoOutput>> findAll(){
-        Type type = new TypeToken<List<SetorDtoOutput>>() {}.getType();
+    public ResponseEntity<List<SetorDtoResponse>> findAll(){
+        Type type = new TypeToken<List<SetorDtoResponse>>() {}.getType();
 
-        List<SetorDtoOutput> result = objectMapperUtils.toList(_setorService.findAll(), type);
-        return new ResponseEntity<List<SetorDtoOutput>>(result, HttpStatus.OK);
+        List<SetorDtoResponse> result = objectMapperUtils.toList(_setorService.findAll(), type);
+        return new ResponseEntity<List<SetorDtoResponse>>(result, HttpStatus.OK);
     }
 
 

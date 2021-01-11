@@ -55,5 +55,7 @@ public class SubCategoriaService implements ISubCategoriaService {
         SubCategoria subCategoriaDB = _subCategoriaRepository.save(newSub);
         return subCategoriaDB;
     }
+
+
 }
 

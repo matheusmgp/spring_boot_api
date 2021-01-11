@@ -3,28 +3,20 @@ package com.mgptech.api.myrestapi.services.controllers;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import com.mgptech.api.myrestapi.application.dto.response.UsuarioDtoResponse;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import com.mgptech.api.myrestapi.application.dto.FilialDto;
 import com.mgptech.api.myrestapi.application.dto.UsuarioDto;
-import com.mgptech.api.myrestapi.application.dto.IO.FilialIO;
 import com.mgptech.api.myrestapi.application.dto.IO.UsuarioIO;
-import com.mgptech.api.myrestapi.application.dto.output.FilialDtoOutput;
-import com.mgptech.api.myrestapi.application.dto.output.UsuarioDtoOutput;
-import com.mgptech.api.myrestapi.application.service.FilialService;
 import com.mgptech.api.myrestapi.application.service.UsuarioService;
-import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/usuario")
@@ -40,13 +32,13 @@ public class UsuarioController {
     UsuarioIO usuarioIO;
 	
 	@RequestMapping(value = "/{id}",  method = RequestMethod.GET)
-	public ResponseEntity<UsuarioDtoOutput> getById(@PathVariable(value = "id") long id){
-		  UsuarioDtoOutput usuarioDtoOutput =  objectMapperUtils.mapTo(_usuarioService.findById(id), UsuarioDtoOutput.class);
-		return new ResponseEntity<>(usuarioDtoOutput, HttpStatus.OK);
+	public ResponseEntity<UsuarioDtoResponse> getById(@PathVariable(value = "id") long id){
+		  UsuarioDtoResponse usuarioDtoResponse =  objectMapperUtils.mapTo(_usuarioService.findById(id), UsuarioDtoResponse.class);
+		return new ResponseEntity<>(usuarioDtoResponse, HttpStatus.OK);
 	}	
 	
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Usuario> add(@RequestBody UsuarioDto usuarioDTO){
+    public ResponseEntity<Usuario> add( @Valid  @RequestBody UsuarioDto usuarioDTO){
     	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTO);
     	Usuario savedModel = _usuarioService.create(usuarioModel);
 		return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
@@ -55,10 +47,10 @@ public class UsuarioController {
    
 
 	@RequestMapping(method = RequestMethod.GET)
-    public ResponseEntity<List<UsuarioDtoOutput>> findAll(){
-		Type type = new TypeToken<List<UsuarioDtoOutput>>() {}.getType();
+    public ResponseEntity<List<UsuarioDtoResponse>> findAll(){
+		Type type = new TypeToken<List<UsuarioDtoResponse>>() {}.getType();
 
-        List<UsuarioDtoOutput> result = objectMapperUtils.toList(_usuarioService.findAll(), type);
+        List<UsuarioDtoResponse> result = objectMapperUtils.toList(_usuarioService.findAll(), type);
 		return new ResponseEntity<>(result, HttpStatus.OK);
     }
 

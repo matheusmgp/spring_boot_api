@@ -1,6 +1,7 @@
 package com.mgptech.api.myrestapi.domain.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -24,11 +25,18 @@ public class Chamado extends BaseEntity implements Serializable{
 	@Column(name = "protocolo", nullable = false)
     private String protocolo;
 
-    @Column(name = "data_abertura", nullable = false)
-    private String dataAbertura;
+   // @Column(name = "data_abertura", nullable = false)
+    //private String dataAbertura;
+     @Basic
+     @Temporal(TemporalType.TIMESTAMP)
+     private java.util.Date dataAbertura;
 
-    @Column(name = "data_fechamento", nullable = true)
-    private String dataFechamento;
+   // @Column(name = "data_fechamento", nullable = true)
+    //private String dataFechamento;
+
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date dataFechamento;
 
     @Column(name = "status", nullable = false)
     private Boolean status;
@@ -63,6 +71,10 @@ public class Chamado extends BaseEntity implements Serializable{
     @JoinColumn(name = "setor_id")
     private Setor setor;
 
+    /*@JsonManagedReference
+    @OneToMany(mappedBy = "chamado")
+    private List<Pendencia> pendencias;
+
     public List<Pendencia> getPendencias() {
         return pendencias;
     }
@@ -70,10 +82,7 @@ public class Chamado extends BaseEntity implements Serializable{
     public void setPendencias(List<Pendencia> pendencias) {
         this.pendencias = pendencias;
     }
-
-    @JsonManagedReference
-    @OneToMany(mappedBy = "chamado")
-    private List<Pendencia> pendencias;
+*/
 
     public Setor getSetor() {
         return setor;
@@ -88,19 +97,21 @@ public class Chamado extends BaseEntity implements Serializable{
     }
     public void setProtocolo(String protocolo) {
     	this.protocolo = protocolo;
-    }  
+    }
 
-    public String getDataAbertura() {
-    	return this.dataAbertura;
+
+    public Date getDataAbertura() {
+        return dataAbertura;
     }
-    public void setDataAbertura(String dataAbertura) {
-    	this.dataAbertura = dataAbertura;
+
+    public void setDataAbertura(Date dataAbertura) {
+        this.dataAbertura = dataAbertura;
     }
-  
-    public String getDataFechamento() {
+
+    public Date getDataFechamento() {
     	return this.dataFechamento;
     }
-    public void setDataFechamento(String dataFechamento) {
+    public void setDataFechamento(Date dataFechamento) {
     	this.dataFechamento = dataFechamento;
     }
 

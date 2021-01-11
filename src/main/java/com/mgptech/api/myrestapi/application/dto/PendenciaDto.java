@@ -2,24 +2,39 @@ package com.mgptech.api.myrestapi.application.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 public class PendenciaDto extends IdentityDto {
 
     @JsonProperty(defaultValue = "descricao")
+    @NotBlank(message = "Nome fantasia é obrigatório.")
+    @Min(value = 8, message = "Nome fantasia não pode ser menor que 8.")
+    @Max(value = 40, message = "Nome fantasia não pode ser maior que 40.")
     private String descricao;
 
     @JsonProperty(defaultValue = "solucao")
+    @Max(value = 300, message = "Solução não pode ser maior que 300.")
     private String solucao;
 
     @JsonProperty(defaultValue = "status")
     private Boolean status;
 
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(defaultValue = "dataAbertura")
-    private String dataAbertura;
+    private java.util.Date dataAbertura;
 
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
     @JsonProperty(defaultValue = "dataFechamento")
-    private String dataFechamento;
+    private java.util.Date dataFechamento;
 
     @JsonProperty(defaultValue = "usuario_id")
     private Long usuario_id;
@@ -71,19 +86,20 @@ public class PendenciaDto extends IdentityDto {
         this.status = status;
     }
 
-    public String getDataAbertura() {
+
+    public Date getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(String dataAbertura) {
+    public void setDataAbertura(Date dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public String getDataFechamento() {
+    public Date getDataFechamento() {
         return dataFechamento;
     }
 
-    public void setDataFechamento(String dataFechamento) {
+    public void setDataFechamento(Date dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
 

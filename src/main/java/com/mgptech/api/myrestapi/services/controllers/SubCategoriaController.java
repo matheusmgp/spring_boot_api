@@ -3,11 +3,10 @@ package com.mgptech.api.myrestapi.services.controllers;
 
 import com.mgptech.api.myrestapi.application.dto.IO.SubCategoriaIO;
 import com.mgptech.api.myrestapi.application.dto.SubCategoriaDto;
-import com.mgptech.api.myrestapi.application.dto.output.SubCategoriaDtoOutput;
+import com.mgptech.api.myrestapi.application.dto.response.SubCategoriaDtoResponse;
 import com.mgptech.api.myrestapi.application.service.CategoriaService;
 import com.mgptech.api.myrestapi.application.service.SubCategoriaService;
 import com.mgptech.api.myrestapi.domain.entities.Categoria;
-import com.mgptech.api.myrestapi.domain.entities.Setor;
 import com.mgptech.api.myrestapi.domain.entities.SubCategoria;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 import org.modelmapper.TypeToken;
@@ -21,7 +20,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/api/subCategoria")
-public class SucCategoriaController {
+public class SubCategoriaController {
     @Autowired
     private SubCategoriaService _subCategoriaService;
 
@@ -36,9 +35,9 @@ public class SucCategoriaController {
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<SubCategoriaDtoOutput> getById(@PathVariable(value = "id") long id){
-        SubCategoriaDtoOutput subCategoriaDtoOutput = objectMapperUtils.mapTo(_subCategoriaService.findById(id), SubCategoriaDtoOutput.class);
-        return new ResponseEntity<>(subCategoriaDtoOutput, HttpStatus.OK);
+    public ResponseEntity<SubCategoriaDtoResponse> getById(@PathVariable(value = "id") long id){
+        SubCategoriaDtoResponse subCategoriaDtoResponse = objectMapperUtils.mapTo(_subCategoriaService.findById(id), SubCategoriaDtoResponse.class);
+        return new ResponseEntity<>(subCategoriaDtoResponse, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.POST)
@@ -52,11 +51,11 @@ public class SucCategoriaController {
     }
 
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<SubCategoriaDtoOutput>> findAll(){
-        Type type = new TypeToken<List<SubCategoriaDtoOutput>>() {}.getType();
+    public ResponseEntity<List<SubCategoriaDtoResponse>> findAll(){
+        Type type = new TypeToken<List<SubCategoriaDtoResponse>>() {}.getType();
 
-        List<SubCategoriaDtoOutput> result = objectMapperUtils.toList(_subCategoriaService.findAll(), type);
-        return new ResponseEntity<List<SubCategoriaDtoOutput>>(result, HttpStatus.OK);
+        List<SubCategoriaDtoResponse> result = objectMapperUtils.toList(_subCategoriaService.findAll(), type);
+        return new ResponseEntity<List<SubCategoriaDtoResponse>>(result, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
@@ -74,6 +73,8 @@ public class SucCategoriaController {
         _subCategoriaService.delete(id);
         return new ResponseEntity<String>("ID: "+id+" deletado.", HttpStatus.OK);
     }
+
+
 
 }
 

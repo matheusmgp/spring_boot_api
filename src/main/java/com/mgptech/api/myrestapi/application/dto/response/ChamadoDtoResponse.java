@@ -1,11 +1,10 @@
 /**
  * 
  */
-package com.mgptech.api.myrestapi.application.dto.output;
+package com.mgptech.api.myrestapi.application.dto.response;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.domain.entities.Setor;
@@ -18,11 +17,11 @@ import io.swagger.annotations.ApiModelProperty;
  * @author matheus
  *
  */
-@ApiModel(value = "ChamadoDtoOutput")
-public class ChamadoDtoOutput extends IdentityDto {
+@ApiModel(value = "ChamadoDtoResponse")
+public class ChamadoDtoResponse extends IdentityDto {
 
 
-	public ChamadoDtoOutput() {
+	public ChamadoDtoResponse() {
 		// TODO Auto-generated constructor stub
 	}
 

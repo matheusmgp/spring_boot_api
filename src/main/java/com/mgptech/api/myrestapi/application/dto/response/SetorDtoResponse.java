@@ -1,4 +1,4 @@
-package com.mgptech.api.myrestapi.application.dto.output;
+package com.mgptech.api.myrestapi.application.dto.response;
 
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
@@ -8,8 +8,8 @@ import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.NotEmpty;
 import java.util.List;
 
-@ApiModel(value = "SetorDtoOutput")
-public class SetorDtoOutput extends IdentityDto {
+@ApiModel(value = "SetorDtoResponse")
+public class SetorDtoResponse extends IdentityDto {
 
 
     @ApiModelProperty(required = true)

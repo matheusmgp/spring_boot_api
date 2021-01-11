@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 @Component
@@ -21,11 +22,15 @@ public class Pendencia  extends BaseEntity implements Serializable {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_abertura", nullable = false)
-    private String dataAbertura;
+    private java.util.Date dataAbertura;
 
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "data_fechamento", nullable = true)
-    private String dataFechamento;
+    private java.util.Date dataFechamento;
 
     @ManyToOne()
     @JsonIgnore
@@ -87,20 +92,28 @@ public class Pendencia  extends BaseEntity implements Serializable {
         this.status = status;
     }
 
-    public String getDataAbertura() {
+    public Date getDataAbertura() {
         return dataAbertura;
     }
 
-    public void setDataAbertura(String dataAbertura) {
+    public void setDataAbertura(Date dataAbertura) {
         this.dataAbertura = dataAbertura;
     }
 
-    public String getDataFechamento() {
+    public Date getDataFechamento() {
         return dataFechamento;
     }
 
-    public void setDataFechamento(String dataFechamento) {
+    public void setDataFechamento(Date dataFechamento) {
         this.dataFechamento = dataFechamento;
+    }
+
+    public Usuario getUsuario_id_finish() {
+        return usuario_id_finish;
+    }
+
+    public void setUsuario_id_finish(Usuario usuario_id_finish) {
+        this.usuario_id_finish = usuario_id_finish;
     }
 
     public Chamado getChamado() {

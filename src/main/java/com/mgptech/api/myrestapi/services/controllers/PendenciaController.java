@@ -2,7 +2,7 @@ package com.mgptech.api.myrestapi.services.controllers;
 
 import com.mgptech.api.myrestapi.application.dto.IO.PendenciaIO;
 import com.mgptech.api.myrestapi.application.dto.PendenciaDto;
-import com.mgptech.api.myrestapi.application.dto.output.PendenciaDtoOutput;
+import com.mgptech.api.myrestapi.application.dto.response.PendenciaDtoResponse;
 import com.mgptech.api.myrestapi.application.service.*;
 import com.mgptech.api.myrestapi.domain.entities.*;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
@@ -43,16 +43,16 @@ public class PendenciaController {
     PendenciaIO pendenciaIO;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<PendenciaDtoOutput> getById(@PathVariable(value = "id") long id){
-        PendenciaDtoOutput pendenciaDtoOutput = objectMapperUtils.mapTo(_pendenciaService.findById(id), PendenciaDtoOutput.class);
-        return new ResponseEntity<>(pendenciaDtoOutput, HttpStatus.OK);
+    public ResponseEntity<PendenciaDtoResponse> getById(@PathVariable(value = "id") long id){
+        PendenciaDtoResponse pendenciaDtoResponse = objectMapperUtils.mapTo(_pendenciaService.findById(id), PendenciaDtoResponse.class);
+        return new ResponseEntity<>(pendenciaDtoResponse, HttpStatus.OK);
     }
 
     @RequestMapping( method = RequestMethod.GET)
-    public ResponseEntity<List<PendenciaDtoOutput>> findAll(){
-        Type type = new TypeToken<List<PendenciaDtoOutput>>() {}.getType();
-        List<PendenciaDtoOutput> result = objectMapperUtils.toList(_pendenciaService.findAll(), type);
-        return new ResponseEntity<List<PendenciaDtoOutput>>(result, HttpStatus.OK);
+    public ResponseEntity<List<PendenciaDtoResponse>> findAll(){
+        Type type = new TypeToken<List<PendenciaDtoResponse>>() {}.getType();
+        List<PendenciaDtoResponse> result = objectMapperUtils.toList(_pendenciaService.findAll(), type);
+        return new ResponseEntity<List<PendenciaDtoResponse>>(result, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.POST)

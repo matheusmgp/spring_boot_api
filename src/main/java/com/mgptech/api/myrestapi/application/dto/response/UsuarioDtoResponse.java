@@ -1,4 +1,4 @@
-package com.mgptech.api.myrestapi.application.dto.output;
+package com.mgptech.api.myrestapi.application.dto.response;
 
 import javax.validation.constraints.NotEmpty;
 
@@ -9,10 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 
 import java.util.List;
 
-@ApiModel(value = "UsuarioDtoOutput")
-public class UsuarioDtoOutput extends IdentityDto {
+@ApiModel(value = "UsuarioDtoResponse")
+public class UsuarioDtoResponse extends IdentityDto {
 
-	public UsuarioDtoOutput() {
+	public UsuarioDtoResponse() {
 		// TODO Auto-generated constructor stub
 	}
 
