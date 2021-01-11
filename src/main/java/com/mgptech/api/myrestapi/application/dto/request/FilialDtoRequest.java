@@ -1,9 +1,8 @@
-package com.mgptech.api.myrestapi.application.dto;
+package com.mgptech.api.myrestapi.application.dto.request;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mgptech.api.myrestapi.domain.entities.Chamado;
-import com.mgptech.api.myrestapi.domain.entities.Filial;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -12,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 /**
  * FilialDto
  */
-public class FilialDto extends IdentityDto {
+public class FilialDtoRequest extends IdentityDto {
 
 
     @JsonProperty(defaultValue = "fantasia")

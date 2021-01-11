@@ -1,21 +1,22 @@
 package com.mgptech.api.myrestapi.services.interfaces;
 
-import com.mgptech.api.myrestapi.application.dto.ChamadoDto;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
+import com.mgptech.api.myrestapi.domain.entities.BaseEntity;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
 
 import java.util.List;
 
-public interface IChamadoService  extends IServiceBase<Chamado>{
+public interface IChamadoService<Entity extends BaseEntity, TDto extends IdentityDto>  extends IServiceBase<Chamado>{
 
-    List<Chamado> getSetoresMesCount();
-    List<Chamado> getSetoresDiaCount();
-    List<Chamado> getEncerradosMesCount();
-    List<Chamado> getSEncerradosDiaCount();
-    List<Chamado> getEncerradosUsersMesCount();
-    List<Chamado> getEncerradosUsersDiaCount ();
-    List<Chamado> getEncerradosAtrasadosMesCount();
-    List<Chamado> getEncerradosAtrasadosDiaCount();
-    List<Chamado> getChamadosCountHoje();
-    List<Chamado> getChamadosCountMes();
-    List<Chamado> getHistoricoById();
+    List<Entity> getSetoresMesCount();
+    List<Entity> getSetoresDiaCount();
+    List<Entity> getEncerradosMesCount();
+    List<Entity> getSEncerradosDiaCount();
+    List<Entity> getEncerradosUsersMesCount();
+    List<Entity> getEncerradosUsersDiaCount ();
+    List<Entity> getEncerradosAtrasadosMesCount();
+    List<Entity> getEncerradosAtrasadosDiaCount();
+    List<Entity> getChamadosCountHoje();
+    List<Entity> getChamadosCountMes();
+    List<Entity> getHistoricoById();
 }

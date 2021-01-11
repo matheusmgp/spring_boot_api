@@ -1,18 +1,15 @@
-package com.mgptech.api.myrestapi.application.dto;
+package com.mgptech.api.myrestapi.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mgptech.api.myrestapi.domain.entities.Chamado;
-import com.mgptech.api.myrestapi.domain.entities.Usuario;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 /**
  * UsuarioDto
  */
-public class UsuarioDto  extends IdentityDto {
+public class UsuarioDtoRequest extends IdentityDto {
 
 
     @JsonProperty(defaultValue = "firstName")

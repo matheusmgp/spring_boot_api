@@ -1,6 +1,6 @@
 package com.mgptech.api.myrestapi.services.controllers;
 
-import com.mgptech.api.myrestapi.application.dto.CategoriaDto;
+import com.mgptech.api.myrestapi.application.dto.request.CategoriaDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.IO.CategoriaIO;
 import com.mgptech.api.myrestapi.application.dto.response.CategoriaDtoResponse;
 import com.mgptech.api.myrestapi.application.service.CategoriaService;
@@ -39,8 +39,8 @@ public class CategoriaController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Categoria> add(@RequestBody CategoriaDto categoriaDto){
-        Categoria categoriaModel = categoriaIO.mapTo(categoriaDto);
+    public ResponseEntity<Categoria> add(@RequestBody CategoriaDtoRequest categoriaDtoRequire){
+        Categoria categoriaModel = categoriaIO.mapTo(categoriaDtoRequire);
         Categoria savedCategoria = _categoriaService.create(categoriaModel);
         return new ResponseEntity<Categoria>(savedCategoria, HttpStatus.CREATED);
     }
@@ -57,8 +57,8 @@ public class CategoriaController {
 
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Categoria> update(@RequestBody CategoriaDto categoriaDto) throws Exception{
-        Categoria categoriaModel = categoriaIO.mapTo(categoriaDto);
+    public ResponseEntity<Categoria> update(@RequestBody CategoriaDtoRequest categoriaDtoRequire) throws Exception{
+        Categoria categoriaModel = categoriaIO.mapTo(categoriaDtoRequire);
         Long id = categoriaModel.getId();
         Categoria savedCategoria = _categoriaService.update(id,categoriaModel);
         return new ResponseEntity<Categoria>(savedCategoria, HttpStatus.OK);

@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.mgptech.api.myrestapi.application.dto.UsuarioDto;
+import com.mgptech.api.myrestapi.application.dto.request.UsuarioDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.IO.UsuarioIO;
 import com.mgptech.api.myrestapi.application.service.UsuarioService;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
@@ -38,8 +38,8 @@ public class UsuarioController {
 	}	
 	
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Usuario> add( @Valid  @RequestBody UsuarioDto usuarioDTO){
-    	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTO);
+    public ResponseEntity<Usuario> add( @Valid  @RequestBody UsuarioDtoRequest usuarioDTORequest){
+    	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTORequest);
     	Usuario savedModel = _usuarioService.create(usuarioModel);
 		return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
     }
@@ -56,8 +56,8 @@ public class UsuarioController {
 
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Usuario> update(@RequestBody UsuarioDto usuarioDTO) throws Exception{
-    	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTO);
+    public ResponseEntity<Usuario> update(@RequestBody UsuarioDtoRequest usuarioDTORequest) throws Exception{
+    	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTORequest);
     	 Long id = usuarioModel.getId();
     	 Usuario savedUsuario = _usuarioService.update(id,usuarioModel);
 		return new ResponseEntity<>(savedUsuario, HttpStatus.OK);

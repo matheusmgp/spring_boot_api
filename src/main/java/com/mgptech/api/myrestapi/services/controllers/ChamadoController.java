@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.mgptech.api.myrestapi.application.dto.ChamadoDto;
+import com.mgptech.api.myrestapi.application.dto.request.ChamadoDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.IO.ChamadoIO;
 import com.mgptech.api.myrestapi.application.service.ChamadoService;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
@@ -63,22 +63,22 @@ public class ChamadoController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Chamado> add(@RequestBody ChamadoDto chamadoDto) throws Exception{
-	   Setor setor = _setorService.findById(chamadoDto.getSetor());
-       Usuario usuario = _usuarioService.findById(chamadoDto.getUsuario());
-       Filial filial = _filialService.findById(chamadoDto.getFilial());
+    public ResponseEntity<Chamado> add(@RequestBody ChamadoDtoRequest chamadoDtoRequire) throws Exception{
+	   Setor setor = _setorService.findById(chamadoDtoRequire.getSetor());
+       Usuario usuario = _usuarioService.findById(chamadoDtoRequire.getUsuario());
+       Filial filial = _filialService.findById(chamadoDtoRequire.getFilial());
 
 
-       Chamado chamadoModel = chamadoIO.mapTo(chamadoDto);
+       Chamado chamadoModel = chamadoIO.mapTo(chamadoDtoRequire);
        chamadoModel.setSetor(setor);
        chamadoModel.setFilial(filial);
        chamadoModel.setUsuario(usuario);
-        if (chamadoDto.getUsuario_id_finish() != null){
-            Usuario usuario_finish = _usuarioService.findById(chamadoDto.getUsuario_id_finish());
+        if (chamadoDtoRequire.getUsuario_id_finish() != null){
+            Usuario usuario_finish = _usuarioService.findById(chamadoDtoRequire.getUsuario_id_finish());
             chamadoModel.setUsuario_finish(usuario_finish);
         }
-        if (chamadoDto.getUsuario_id_redirect() != null){
-            Usuario usuario_redirect = _usuarioService.findById(chamadoDto.getUsuario_id_redirect());
+        if (chamadoDtoRequire.getUsuario_id_redirect() != null){
+            Usuario usuario_redirect = _usuarioService.findById(chamadoDtoRequire.getUsuario_id_redirect());
             chamadoModel.setUsuario_redirect(usuario_redirect);
         }
         Chamado savedChamado = _chamadoService.create(chamadoModel);
@@ -86,22 +86,22 @@ public class ChamadoController {
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Chamado> update(@RequestBody ChamadoDto chamadoDto) throws Exception {
+    public ResponseEntity<Chamado> update(@RequestBody ChamadoDtoRequest chamadoDtoRequire) throws Exception {
 
-        Setor setor = _setorService.findById(chamadoDto.getSetor());
-        Usuario usuario = _usuarioService.findById(chamadoDto.getUsuario());
-        Filial filial = _filialService.findById(chamadoDto.getFilial());
+        Setor setor = _setorService.findById(chamadoDtoRequire.getSetor());
+        Usuario usuario = _usuarioService.findById(chamadoDtoRequire.getUsuario());
+        Filial filial = _filialService.findById(chamadoDtoRequire.getFilial());
 
-        Chamado chamadoModel = chamadoIO.mapTo(chamadoDto);
+        Chamado chamadoModel = chamadoIO.mapTo(chamadoDtoRequire);
         chamadoModel.setSetor(setor);
         chamadoModel.setFilial(filial);
         chamadoModel.setUsuario(usuario);
-        if (chamadoDto.getUsuario_id_finish() != null){
-            Usuario usuario_finish = _usuarioService.findById(chamadoDto.getUsuario_id_finish());
+        if (chamadoDtoRequire.getUsuario_id_finish() != null){
+            Usuario usuario_finish = _usuarioService.findById(chamadoDtoRequire.getUsuario_id_finish());
             chamadoModel.setUsuario_finish(usuario_finish);
         }
-        if (chamadoDto.getUsuario_id_redirect() != null){
-            Usuario usuario_redirect = _usuarioService.findById(chamadoDto.getUsuario_id_redirect());
+        if (chamadoDtoRequire.getUsuario_id_redirect() != null){
+            Usuario usuario_redirect = _usuarioService.findById(chamadoDtoRequire.getUsuario_id_redirect());
             chamadoModel.setUsuario_redirect(usuario_redirect);
         }
         Long id = chamadoModel.getId();

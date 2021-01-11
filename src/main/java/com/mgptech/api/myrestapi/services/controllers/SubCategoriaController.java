@@ -2,7 +2,7 @@ package com.mgptech.api.myrestapi.services.controllers;
 
 
 import com.mgptech.api.myrestapi.application.dto.IO.SubCategoriaIO;
-import com.mgptech.api.myrestapi.application.dto.SubCategoriaDto;
+import com.mgptech.api.myrestapi.application.dto.request.SubCategoriaDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.response.SubCategoriaDtoResponse;
 import com.mgptech.api.myrestapi.application.service.CategoriaService;
 import com.mgptech.api.myrestapi.application.service.SubCategoriaService;
@@ -41,10 +41,10 @@ public class SubCategoriaController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<SubCategoria> add(@RequestBody SubCategoriaDto subCategoriaDto){
-        Categoria categoria = _categoriaService.findById(subCategoriaDto.getCategoria_id());
+    public ResponseEntity<SubCategoria> add(@RequestBody SubCategoriaDtoRequest subCategoriaDtoRequest){
+        Categoria categoria = _categoriaService.findById(subCategoriaDtoRequest.getCategoria_id());
 
-        SubCategoria subCategoriaModel = subCategoriaIO.mapTo(subCategoriaDto);
+        SubCategoria subCategoriaModel = subCategoriaIO.mapTo(subCategoriaDtoRequest);
         subCategoriaModel.setCategoria(categoria);
         SubCategoria savedSubCategoria = _subCategoriaService.create(subCategoriaModel);
         return new ResponseEntity<SubCategoria>(savedSubCategoria, HttpStatus.CREATED);
@@ -59,10 +59,10 @@ public class SubCategoriaController {
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<SubCategoria> update(@RequestBody SubCategoriaDto subCategoriaDto) throws Exception{
-        Categoria categoria = _categoriaService.findById(subCategoriaDto.getCategoria_id());
+    public ResponseEntity<SubCategoria> update(@RequestBody SubCategoriaDtoRequest subCategoriaDtoRequest) throws Exception{
+        Categoria categoria = _categoriaService.findById(subCategoriaDtoRequest.getCategoria_id());
 
-        SubCategoria subCategoriaModel = subCategoriaIO.mapTo(subCategoriaDto);
+        SubCategoria subCategoriaModel = subCategoriaIO.mapTo(subCategoriaDtoRequest);
         subCategoriaModel.setCategoria(categoria);
         Long id = subCategoriaModel.getId();
         SubCategoria savedSubCategoria = _subCategoriaService.update(id,subCategoriaModel);

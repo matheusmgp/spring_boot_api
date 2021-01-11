@@ -5,7 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Component;
 
-import com.mgptech.api.myrestapi.application.dto.FilialDto;
+import com.mgptech.api.myrestapi.application.dto.request.FilialDtoRequest;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
 
 @Component("filialIO")
@@ -14,18 +14,18 @@ public class FilialIO {
 
 	 private ModelMapper modelMapper;
 
-	    final Converter<FilialDto, Filial> userConverter = new Converter<FilialDto, Filial>() {
+	    final Converter<FilialDtoRequest, Filial> userConverter = new Converter<FilialDtoRequest, Filial>() {
 
 	        @Override
-	        public Filial convert(MappingContext<FilialDto, Filial> context) {
-	        	FilialDto filialDto = context.getSource();
+	        public Filial convert(MappingContext<FilialDtoRequest, Filial> context) {
+	        	FilialDtoRequest filialDtoRequire = context.getSource();
 	            // @formatter:off
 	        	Filial filial = new Filial();
-	        	filial.setCnpj(filialDto.getCnpj());
-	        	filial.setFantasia(filialDto.getFantasia());
-	        	filial.setRazao( filialDto.getRazao());
-				if(filialDto.getId() != null){
-					filial.setId(filialDto.getId());
+	        	filial.setCnpj(filialDtoRequire.getCnpj());
+	        	filial.setFantasia(filialDtoRequire.getFantasia());
+	        	filial.setRazao( filialDtoRequire.getRazao());
+				if(filialDtoRequire.getId() != null){
+					filial.setId(filialDtoRequire.getId());
 				}
 	        
 	            // @formatter:on
@@ -39,8 +39,8 @@ public class FilialIO {
 		      modelMapper.addConverter(userConverter);
 		}
 	 
-	    public Filial mapTo(FilialDto filialDto) {
-	        return this.modelMapper.map(filialDto, Filial.class);
+	    public Filial mapTo(FilialDtoRequest filialDtoRequire) {
+	        return this.modelMapper.map(filialDtoRequire, Filial.class);
 	    }
 
 }

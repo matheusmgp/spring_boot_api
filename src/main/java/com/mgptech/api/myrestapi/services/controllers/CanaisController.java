@@ -1,7 +1,7 @@
 package com.mgptech.api.myrestapi.services.controllers;
 
 
-import com.mgptech.api.myrestapi.application.dto.CanaisDto;
+import com.mgptech.api.myrestapi.application.dto.request.CanaisDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.IO.CanaisIO;
 import com.mgptech.api.myrestapi.application.dto.response.CanaisDtoResponse;
 import com.mgptech.api.myrestapi.application.service.*;
@@ -43,16 +43,16 @@ public class CanaisController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Canais> add(@RequestBody CanaisDto canaisDto) throws Exception{
-        Canais canalModel = canaisIO.mapTo(canaisDto);
+    public ResponseEntity<Canais> add(@RequestBody CanaisDtoRequest canaisDtoRequire) throws Exception{
+        Canais canalModel = canaisIO.mapTo(canaisDtoRequire);
         Canais savedCanais = _canaisService.create(canalModel);
         return new ResponseEntity<>(savedCanais, HttpStatus.CREATED);
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Canais> update(@RequestBody CanaisDto canaisDto) throws Exception {
+    public ResponseEntity<Canais> update(@RequestBody CanaisDtoRequest canaisDtoRequire) throws Exception {
 
-        Canais canaisModel = canaisIO.mapTo(canaisDto);
+        Canais canaisModel = canaisIO.mapTo(canaisDtoRequire);
         Long id = canaisModel.getId();
         Canais savedCanal = _canaisService.update(id,canaisModel);
         return new ResponseEntity<>(savedCanal, HttpStatus.OK);

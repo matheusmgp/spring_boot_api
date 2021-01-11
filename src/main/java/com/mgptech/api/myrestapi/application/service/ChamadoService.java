@@ -3,6 +3,7 @@
  */
 package com.mgptech.api.myrestapi.application.service;
 
+import com.mgptech.api.myrestapi.application.dto.request.ChamadoDtoRequest;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
@@ -18,7 +19,7 @@ import java.util.List;
  *
  */
 @Service
-public class ChamadoService  implements IChamadoService{
+public class ChamadoService  implements IChamadoService<Chamado, ChamadoDtoRequest>{
 
 	/**
 	 * 

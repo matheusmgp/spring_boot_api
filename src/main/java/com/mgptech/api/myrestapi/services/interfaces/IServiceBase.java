@@ -1,8 +1,6 @@
 package com.mgptech.api.myrestapi.services.interfaces;
 
 import com.mgptech.api.myrestapi.domain.entities.BaseEntity;
-
-import javax.swing.text.html.parser.Entity;
 import java.util.List;
 
 public interface IServiceBase<Entity extends BaseEntity> {

@@ -1,6 +1,6 @@
 package com.mgptech.api.myrestapi.application.dto.IO;
 
-import com.mgptech.api.myrestapi.application.dto.SubCategoriaDto;
+import com.mgptech.api.myrestapi.application.dto.request.SubCategoriaDtoRequest;
 import com.mgptech.api.myrestapi.domain.entities.SubCategoria;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -13,17 +13,17 @@ public class SubCategoriaIO {
 
     private ModelMapper modelMapper;
 
-    final Converter<SubCategoriaDto, SubCategoria> userConverter = new Converter<SubCategoriaDto, SubCategoria>() {
+    final Converter<SubCategoriaDtoRequest, SubCategoria> userConverter = new Converter<SubCategoriaDtoRequest, SubCategoria>() {
 
         @Override
-        public SubCategoria convert(MappingContext<SubCategoriaDto, SubCategoria> context) {
-            SubCategoriaDto subCategoriaDto = context.getSource();
+        public SubCategoria convert(MappingContext<SubCategoriaDtoRequest, SubCategoria> context) {
+            SubCategoriaDtoRequest subCategoriaDtoRequest = context.getSource();
             // @formatter:off
             SubCategoria subCategoria = new SubCategoria();
-            subCategoria.setNome(subCategoriaDto.getNome());
-            subCategoria.setStatus(subCategoriaDto.getStatus());
-            if(subCategoriaDto.getId() != null){
-                subCategoria.setId(subCategoriaDto.getId());
+            subCategoria.setNome(subCategoriaDtoRequest.getNome());
+            subCategoria.setStatus(subCategoriaDtoRequest.getStatus());
+            if(subCategoriaDtoRequest.getId() != null){
+                subCategoria.setId(subCategoriaDtoRequest.getId());
             }
             return subCategoria;
         }
@@ -35,8 +35,8 @@ public class SubCategoriaIO {
         modelMapper.addConverter(userConverter);
     }
 
-    public SubCategoria mapTo(SubCategoriaDto subCategoriaDto) {
-        return this.modelMapper.map(subCategoriaDto, SubCategoria.class);
+    public SubCategoria mapTo(SubCategoriaDtoRequest subCategoriaDtoRequest) {
+        return this.modelMapper.map(subCategoriaDtoRequest, SubCategoria.class);
     }
 
 }

@@ -1,6 +1,6 @@
 package com.mgptech.api.myrestapi.application.dto.IO;
 
-import com.mgptech.api.myrestapi.application.dto.CanaisDto;
+import com.mgptech.api.myrestapi.application.dto.request.CanaisDtoRequest;
 import com.mgptech.api.myrestapi.domain.entities.Canais;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -13,17 +13,17 @@ public class CanaisIO {
 
     private ModelMapper modelMapper;
 
-    final Converter<CanaisDto, Canais> userConverter = new Converter<CanaisDto, Canais>() {
+    final Converter<CanaisDtoRequest, Canais> userConverter = new Converter<CanaisDtoRequest, Canais>() {
 
         @Override
-        public Canais convert(MappingContext<CanaisDto, Canais> context) {
-            CanaisDto canaisDto = context.getSource();
+        public Canais convert(MappingContext<CanaisDtoRequest, Canais> context) {
+            CanaisDtoRequest canaisDtoRequire = context.getSource();
             // @formatter:off
             Canais canais = new Canais();
-            canais.setNome(canaisDto.getNome());
-            canais.setStatus(canaisDto.getStatus());
-            if(canaisDto.getId() != null){
-                canais.setId(canaisDto.getId());
+            canais.setNome(canaisDtoRequire.getNome());
+            canais.setStatus(canaisDtoRequire.getStatus());
+            if(canaisDtoRequire.getId() != null){
+                canais.setId(canaisDtoRequire.getId());
             }
             return canais;
         }
@@ -35,8 +35,8 @@ public class CanaisIO {
         modelMapper.addConverter(userConverter);
     }
 
-    public Canais mapTo(CanaisDto canaisDto) {
-        return this.modelMapper.map(canaisDto, Canais.class);
+    public Canais mapTo(CanaisDtoRequest canaisDtoRequire) {
+        return this.modelMapper.map(canaisDtoRequire, Canais.class);
     }
 
 }

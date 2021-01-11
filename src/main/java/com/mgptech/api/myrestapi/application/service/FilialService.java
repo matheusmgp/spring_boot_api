@@ -9,10 +9,7 @@ import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreate
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.mgptech.api.myrestapi.application.dto.FilialDto;
-import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
-import com.mgptech.api.myrestapi.domain.interfaces.repositories.IChamadoRepository;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.IFilialRepository;
 import com.mgptech.api.myrestapi.services.interfaces.IFilialService;
 

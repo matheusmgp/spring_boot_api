@@ -2,7 +2,7 @@ package com.mgptech.api.myrestapi.services.controllers;
 
 
 import com.mgptech.api.myrestapi.application.dto.IO.SetorIO;
-import com.mgptech.api.myrestapi.application.dto.SetorDto;
+import com.mgptech.api.myrestapi.application.dto.request.SetorDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.response.SetorDtoResponse;
 import com.mgptech.api.myrestapi.application.service.SetorService;
 import com.mgptech.api.myrestapi.domain.entities.Setor;
@@ -38,8 +38,8 @@ public class SetorController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Setor> add( @Valid @ModelAttribute("SetorDto") @RequestBody SetorDto setorDto){
-        Setor setorModel = setorIO.mapTo(setorDto);
+    public ResponseEntity<Setor> add( @Valid @ModelAttribute("SetorDto") @RequestBody SetorDtoRequest setorDtoRequest){
+        Setor setorModel = setorIO.mapTo(setorDtoRequest);
         Setor savedSetor = _setorService.create(setorModel);
         return new ResponseEntity<Setor>(savedSetor, HttpStatus.CREATED);
     }
@@ -56,8 +56,8 @@ public class SetorController {
 
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Setor> update(@RequestBody SetorDto setorDto) throws Exception{
-        Setor setorModel = setorIO.mapTo(setorDto);
+    public ResponseEntity<Setor> update(@RequestBody SetorDtoRequest setorDtoRequest) throws Exception{
+        Setor setorModel = setorIO.mapTo(setorDtoRequest);
         Long id = setorModel.getId();
         Setor savedSetor = _setorService.update(id,setorModel);
         return new ResponseEntity<Setor>(savedSetor, HttpStatus.OK);

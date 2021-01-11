@@ -1,7 +1,7 @@
 package com.mgptech.api.myrestapi.services.controllers;
 
 import com.mgptech.api.myrestapi.application.dto.IO.PendenciaIO;
-import com.mgptech.api.myrestapi.application.dto.PendenciaDto;
+import com.mgptech.api.myrestapi.application.dto.request.PendenciaDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.response.PendenciaDtoResponse;
 import com.mgptech.api.myrestapi.application.service.*;
 import com.mgptech.api.myrestapi.domain.entities.*;
@@ -56,21 +56,21 @@ public class PendenciaController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Pendencia> add(@RequestBody PendenciaDto pendenciaDto) throws Exception{
-        Canais canal = _canaisService.findById(pendenciaDto.getCanal_id());
-        Usuario usuario = _usuarioService.findById(pendenciaDto.getUsuario_id());
-        Categoria categoria = _categoriaService.findById(pendenciaDto.getCategoria_id());
-        SubCategoria subCategoria = _subCategoriaService.findById(pendenciaDto.getSubCategoria_id());
-        Chamado chamado = _chamadoService.findById(pendenciaDto.getChamado_id());
+    public ResponseEntity<Pendencia> add(@RequestBody PendenciaDtoRequest pendenciaDtoRequest) throws Exception{
+        Canais canal = _canaisService.findById(pendenciaDtoRequest.getCanal_id());
+        Usuario usuario = _usuarioService.findById(pendenciaDtoRequest.getUsuario_id());
+        Categoria categoria = _categoriaService.findById(pendenciaDtoRequest.getCategoria_id());
+        SubCategoria subCategoria = _subCategoriaService.findById(pendenciaDtoRequest.getSubCategoria_id());
+        Chamado chamado = _chamadoService.findById(pendenciaDtoRequest.getChamado_id());
 
-        Pendencia pendenciaModel = pendenciaIO.mapTo(pendenciaDto);
+        Pendencia pendenciaModel = pendenciaIO.mapTo(pendenciaDtoRequest);
         pendenciaModel.setUsuario(usuario);
         pendenciaModel.setCanal(canal);
         pendenciaModel.setCategoria(categoria);
         pendenciaModel.setSubCategoria(subCategoria);
         pendenciaModel.setChamado(chamado);
-        if (pendenciaDto.getUsuario_id_finish() != null){
-            Usuario usuario_id_finish = _usuarioService.findById(pendenciaDto.getUsuario_id_finish());
+        if (pendenciaDtoRequest.getUsuario_id_finish() != null){
+            Usuario usuario_id_finish = _usuarioService.findById(pendenciaDtoRequest.getUsuario_id_finish());
             pendenciaModel.setUsuario_finish(usuario_id_finish);
         }
         Pendencia savedPendencia = _pendenciaService.create(pendenciaModel);
@@ -78,21 +78,21 @@ public class PendenciaController {
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Pendencia> update(@RequestBody PendenciaDto pendenciaDto) throws Exception {
-        Canais canal = _canaisService.findById(pendenciaDto.getCanal_id());
-        Usuario usuario = _usuarioService.findById(pendenciaDto.getUsuario_id());
-        Categoria categoria = _categoriaService.findById(pendenciaDto.getCategoria_id());
-        SubCategoria subCategoria = _subCategoriaService.findById(pendenciaDto.getSubCategoria_id());
-        Chamado chamado = _chamadoService.findById(pendenciaDto.getChamado_id());
+    public ResponseEntity<Pendencia> update(@RequestBody PendenciaDtoRequest pendenciaDtoRequest) throws Exception {
+        Canais canal = _canaisService.findById(pendenciaDtoRequest.getCanal_id());
+        Usuario usuario = _usuarioService.findById(pendenciaDtoRequest.getUsuario_id());
+        Categoria categoria = _categoriaService.findById(pendenciaDtoRequest.getCategoria_id());
+        SubCategoria subCategoria = _subCategoriaService.findById(pendenciaDtoRequest.getSubCategoria_id());
+        Chamado chamado = _chamadoService.findById(pendenciaDtoRequest.getChamado_id());
 
-        Pendencia pendenciaModel = pendenciaIO.mapTo(pendenciaDto);
+        Pendencia pendenciaModel = pendenciaIO.mapTo(pendenciaDtoRequest);
         pendenciaModel.setUsuario(usuario);
         pendenciaModel.setCanal(canal);
         pendenciaModel.setCategoria(categoria);
         pendenciaModel.setSubCategoria(subCategoria);
         pendenciaModel.setChamado(chamado);
-        if (pendenciaDto.getUsuario_id_finish() != null){
-            Usuario usuario_id_finish = _usuarioService.findById(pendenciaDto.getUsuario_id_finish());
+        if (pendenciaDtoRequest.getUsuario_id_finish() != null){
+            Usuario usuario_id_finish = _usuarioService.findById(pendenciaDtoRequest.getUsuario_id_finish());
             pendenciaModel.setUsuario_finish(usuario_id_finish);
         }
         Long id = pendenciaModel.getId();

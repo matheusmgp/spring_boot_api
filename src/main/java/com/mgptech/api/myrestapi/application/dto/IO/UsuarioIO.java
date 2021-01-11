@@ -5,9 +5,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.spi.MappingContext;
 import org.springframework.stereotype.Component;
 
-import com.mgptech.api.myrestapi.application.dto.ChamadoDto;
-import com.mgptech.api.myrestapi.application.dto.UsuarioDto;
-import com.mgptech.api.myrestapi.domain.entities.Chamado;
+import com.mgptech.api.myrestapi.application.dto.request.UsuarioDtoRequest;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
 
 @Component("usuarioIO")
@@ -15,19 +13,19 @@ public class UsuarioIO {
 
 	 private ModelMapper modelMapper;
 
-	    final Converter<UsuarioDto, Usuario> userConverter = new Converter<UsuarioDto, Usuario>() {
+	    final Converter<UsuarioDtoRequest, Usuario> userConverter = new Converter<UsuarioDtoRequest, Usuario>() {
 
 	        @Override
-	        public Usuario convert(MappingContext<UsuarioDto, Usuario> context) {
-	        	UsuarioDto usuarioDto = context.getSource();
+	        public Usuario convert(MappingContext<UsuarioDtoRequest, Usuario> context) {
+	        	UsuarioDtoRequest usuarioDtoRequest = context.getSource();
 	            // @formatter:off
 	        	Usuario usuario = new Usuario();
-	        	usuario.setAcesso(usuarioDto.getAcesso());
-	        	usuario.setFirstName(usuarioDto.getFirstName());
-	        	usuario.setLastName( usuarioDto.getLastName());
+	        	usuario.setAcesso(usuarioDtoRequest.getAcesso());
+	        	usuario.setFirstName(usuarioDtoRequest.getFirstName());
+	        	usuario.setLastName( usuarioDtoRequest.getLastName());
 
-				if(usuarioDto.getId() != null){
-					usuario.setId(usuarioDto.getId());
+				if(usuarioDtoRequest.getId() != null){
+					usuario.setId(usuarioDtoRequest.getId());
 				}
 	        
 	            // @formatter:on
@@ -41,8 +39,8 @@ public class UsuarioIO {
 		      modelMapper.addConverter(userConverter);
 		}
 	 
-	    public Usuario mapTo(UsuarioDto usuarioDto) {
-	        return this.modelMapper.map(usuarioDto, Usuario.class);
+	    public Usuario mapTo(UsuarioDtoRequest usuarioDtoRequest) {
+	        return this.modelMapper.map(usuarioDtoRequest, Usuario.class);
 	    }
 
 }

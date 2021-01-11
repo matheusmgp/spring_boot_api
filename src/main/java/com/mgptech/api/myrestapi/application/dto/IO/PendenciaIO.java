@@ -1,6 +1,6 @@
 package com.mgptech.api.myrestapi.application.dto.IO;
 
-import com.mgptech.api.myrestapi.application.dto.PendenciaDto;
+import com.mgptech.api.myrestapi.application.dto.request.PendenciaDtoRequest;
 import com.mgptech.api.myrestapi.domain.entities.Pendencia;
 import org.modelmapper.Converter;
 import org.modelmapper.ModelMapper;
@@ -12,21 +12,21 @@ public class PendenciaIO {
 
     private ModelMapper modelMapper;
 
-    final Converter<PendenciaDto, Pendencia> userConverter = new Converter<PendenciaDto, Pendencia>() {
+    final Converter<PendenciaDtoRequest, Pendencia> userConverter = new Converter<PendenciaDtoRequest, Pendencia>() {
 
         @Override
-        public Pendencia convert(MappingContext<PendenciaDto, Pendencia> context) {
-            PendenciaDto pendenciaDto = context.getSource();
+        public Pendencia convert(MappingContext<PendenciaDtoRequest, Pendencia> context) {
+            PendenciaDtoRequest pendenciaDtoRequest = context.getSource();
             // @formatter:off
             Pendencia pendencia = new Pendencia();
-            pendencia.setDataAbertura(pendenciaDto.getDataAbertura());
-            pendencia.setDataFechamento(pendenciaDto.getDataFechamento());
-            pendencia.setStatus(pendenciaDto.getStatus());
-            pendencia.setDescricao(pendenciaDto.getDescricao());
-            pendencia.setSolucao(pendenciaDto.getSolucao());
+            pendencia.setDataAbertura(pendenciaDtoRequest.getDataAbertura());
+            pendencia.setDataFechamento(pendenciaDtoRequest.getDataFechamento());
+            pendencia.setStatus(pendenciaDtoRequest.getStatus());
+            pendencia.setDescricao(pendenciaDtoRequest.getDescricao());
+            pendencia.setSolucao(pendenciaDtoRequest.getSolucao());
 
-            if(pendenciaDto.getId() != null){
-                pendencia.setId(pendenciaDto.getId());
+            if(pendenciaDtoRequest.getId() != null){
+                pendencia.setId(pendenciaDtoRequest.getId());
             }
             return pendencia;
         }
@@ -38,8 +38,8 @@ public class PendenciaIO {
         modelMapper.addConverter(userConverter);
     }
 
-    public Pendencia mapTo(PendenciaDto pendenciaDto) {
-        return this.modelMapper.map(pendenciaDto, Pendencia.class);
+    public Pendencia mapTo(PendenciaDtoRequest pendenciaDtoRequest) {
+        return this.modelMapper.map(pendenciaDtoRequest, Pendencia.class);
     }
 
 }

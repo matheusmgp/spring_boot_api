@@ -1,9 +1,9 @@
-package com.mgptech.api.myrestapi.application.dto;
+package com.mgptech.api.myrestapi.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
@@ -11,7 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
-public class PendenciaDto extends IdentityDto {
+public class PendenciaDtoRequest extends IdentityDto {
 
     @JsonProperty(defaultValue = "descricao")
     @NotBlank(message = "Nome fantasia é obrigatório.")

@@ -1,13 +1,13 @@
-package com.mgptech.api.myrestapi.application.dto;
+package com.mgptech.api.myrestapi.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-public class SubCategoriaDto extends IdentityDto{
-
+public class SetorDtoRequest extends IdentityDto {
 
     @JsonProperty(defaultValue = "nome")
     @NotBlank(message = "Nome é obrigatório.")
@@ -17,9 +17,6 @@ public class SubCategoriaDto extends IdentityDto{
 
     @JsonProperty(defaultValue = "status")
     private Boolean status;
-
-    @JsonProperty(defaultValue = "categoria_id")
-    private Long categoria_id;
 
     public String getNome() {
         return nome;
@@ -35,13 +32,5 @@ public class SubCategoriaDto extends IdentityDto{
 
     public void setStatus(Boolean status) {
         this.status = status;
-    }
-
-    public Long getCategoria_id() {
-        return categoria_id;
-    }
-
-    public void setCategoria_id(Long categoria_id) {
-        this.categoria_id = categoria_id;
     }
 }

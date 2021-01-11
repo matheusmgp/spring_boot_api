@@ -1,19 +1,13 @@
-package com.mgptech.api.myrestapi.application.dto;
+package com.mgptech.api.myrestapi.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.mgptech.api.myrestapi.domain.entities.Chamado;
-import com.mgptech.api.myrestapi.domain.entities.Filial;
-import com.mgptech.api.myrestapi.domain.entities.Setor;
-import com.mgptech.api.myrestapi.domain.entities.Usuario;
 
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import javax.persistence.Basic;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
@@ -22,7 +16,7 @@ import java.util.Date;
  */
 
 @Data
-public class ChamadoDto extends IdentityDto {
+public class ChamadoDtoRequest extends IdentityDto {
 
 
 	

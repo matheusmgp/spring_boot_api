@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mgptech.api.myrestapi.application.dto.FilialDto;
+import com.mgptech.api.myrestapi.application.dto.request.FilialDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.IO.FilialIO;
 import com.mgptech.api.myrestapi.application.service.FilialService;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
@@ -41,8 +41,8 @@ public class FilialController {
 	}	
 	
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Filial> add(@RequestBody FilialDto filialDTO){
-    	Filial filialModel = filialIO.mapTo(filialDTO);
+    public ResponseEntity<Filial> add(@RequestBody FilialDtoRequest filialDTORequire){
+    	Filial filialModel = filialIO.mapTo(filialDTORequire);
     	Filial savedFilial = _filialService.create(filialModel);
 		return new ResponseEntity<>(savedFilial, HttpStatus.CREATED);
     }
@@ -59,8 +59,8 @@ public class FilialController {
 
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Filial> update(@RequestBody FilialDto filialDTO) throws Exception{
-    	 Filial filialModel = filialIO.mapTo(filialDTO);
+    public ResponseEntity<Filial> update(@RequestBody FilialDtoRequest filialDTORequire) throws Exception{
+    	 Filial filialModel = filialIO.mapTo(filialDTORequire);
     	 Long id = filialModel.getId();
     	 Filial savedFilial = _filialService.update(id,filialModel);
 		return new ResponseEntity<>(savedFilial, HttpStatus.OK);

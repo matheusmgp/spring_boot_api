@@ -1,17 +1,18 @@
-package com.mgptech.api.myrestapi.application.dto;
+package com.mgptech.api.myrestapi.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 
-public class SetorDto extends IdentityDto {
+public class CanaisDtoRequest extends IdentityDto {
 
     @JsonProperty(defaultValue = "nome")
     @NotBlank(message = "Nome é obrigatório.")
     @Min(value = 8, message = "Nome não pode ser menor que 8.")
-    @Max(value = 40, message = "Nome não pode ser maior que 40.")
+    @Max(value = 35, message = "Nome não pode ser maior que 35.")
     private String nome;
 
     @JsonProperty(defaultValue = "status")
