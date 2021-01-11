@@ -10,7 +10,6 @@ public class MyrestapiApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(MyrestapiApplication.class, args);
 
-
 	}
 
 }
