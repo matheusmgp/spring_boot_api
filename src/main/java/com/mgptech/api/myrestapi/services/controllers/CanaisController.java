@@ -18,6 +18,7 @@ import java.util.List;
 
 @RestController()
 @RequestMapping("/api/canal")
+@CrossOrigin(origins = "http://localhost:8080")
 public class CanaisController {
 
     @Autowired
@@ -30,6 +31,7 @@ public class CanaisController {
     CanaisIO canaisIO;
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+
     public ResponseEntity<CanaisDtoResponse> getById(@PathVariable(value = "id") long id){
         CanaisDtoResponse canaisDtoResponse = objectMapperUtils.mapTo(_canaisService.findById(id), CanaisDtoResponse.class);
         return new ResponseEntity<>(canaisDtoResponse, HttpStatus.OK);
