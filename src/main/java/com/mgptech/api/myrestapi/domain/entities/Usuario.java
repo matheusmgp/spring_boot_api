@@ -18,6 +18,22 @@ import org.springframework.stereotype.Component;
 @JsonIgnoreProperties(ignoreUnknown=true)
 public class Usuario extends BaseEntity implements Serializable{
 
+    public Usuario(Long id, String nome, String email, String senha){
+        this.id = id;
+        this.firstName = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public Usuario(String nome, String email, String senha){
+        this.firstName = nome;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    public Usuario(){
+
+    }
 	@Column(name = "first_name", nullable = false)
     private String firstName;    
 
@@ -33,7 +49,36 @@ public class Usuario extends BaseEntity implements Serializable{
     @OneToMany(mappedBy = "usuario")
     private List<Pendencia> pendencias;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+    @Column(name = "senha", nullable = false)
+    private String senha;
+    @Column(name = "token", nullable = true)
+    private String token;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 
     public List<Pendencia> getPendencias() {
         return pendencias;

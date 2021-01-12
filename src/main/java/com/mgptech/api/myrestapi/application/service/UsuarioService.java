@@ -9,6 +9,7 @@ import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundE
 import com.mgptech.api.myrestapi.services.interfaces.IUsuarioService;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,10 @@ public class UsuarioService implements IUsuarioService {
         newUsuario.setId(id);
         Usuario UsuarioDB = _usuarioRepository.save(newUsuario);
         return UsuarioDB;
+    }
+
+    Optional<Usuario> findByEmail(String email){
+        return null;
     }
 }
 
