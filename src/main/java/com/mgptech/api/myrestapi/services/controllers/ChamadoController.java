@@ -59,7 +59,7 @@ public class ChamadoController {
     public ResponseEntity<List<ChamadoDtoResponse>> findAll(){
         Type type = new TypeToken<List<ChamadoDtoResponse>>() {}.getType();
         List<ChamadoDtoResponse> result = objectMapperUtils.toList(_chamadoService.findAll(), type);
-        return new ResponseEntity<List<ChamadoDtoResponse>>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.POST)
@@ -82,7 +82,7 @@ public class ChamadoController {
             chamadoModel.setUsuario_redirect(usuario_redirect);
         }
         Chamado savedChamado = _chamadoService.create(chamadoModel);
-        return new ResponseEntity<Chamado>(savedChamado, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedChamado, HttpStatus.CREATED);
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
@@ -106,7 +106,7 @@ public class ChamadoController {
         }
         Long id = chamadoModel.getId();
         Chamado savedChamado = _chamadoService.update(id,chamadoModel);
-        return new ResponseEntity<Chamado>(savedChamado, HttpStatus.OK);
+        return new ResponseEntity<>(savedChamado, HttpStatus.OK);
     }
 
 
@@ -114,7 +114,7 @@ public class ChamadoController {
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
     	  _chamadoService.delete(id);
-    	  return new ResponseEntity<String>("ID: "+id+" deletado.", HttpStatus.OK);
+    	  return new ResponseEntity<>("ID: "+id+" deletado.", HttpStatus.OK);
     }
 	
 }

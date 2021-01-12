@@ -42,7 +42,7 @@ public class CategoriaController {
     public ResponseEntity<Categoria> add(@RequestBody CategoriaDtoRequest categoriaDtoRequire){
         Categoria categoriaModel = categoriaIO.mapTo(categoriaDtoRequire);
         Categoria savedCategoria = _categoriaService.create(categoriaModel);
-        return new ResponseEntity<Categoria>(savedCategoria, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedCategoria, HttpStatus.CREATED);
     }
 
 
@@ -52,7 +52,7 @@ public class CategoriaController {
         Type type = new TypeToken<List<CategoriaDtoResponse>>() {}.getType();
 
         List<CategoriaDtoResponse> result = objectMapperUtils.toList(_categoriaService.findAll(), type);
-        return new ResponseEntity<List<CategoriaDtoResponse>>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
@@ -61,7 +61,7 @@ public class CategoriaController {
         Categoria categoriaModel = categoriaIO.mapTo(categoriaDtoRequire);
         Long id = categoriaModel.getId();
         Categoria savedCategoria = _categoriaService.update(id,categoriaModel);
-        return new ResponseEntity<Categoria>(savedCategoria, HttpStatus.OK);
+        return new ResponseEntity<>(savedCategoria, HttpStatus.OK);
     }
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") Long id){

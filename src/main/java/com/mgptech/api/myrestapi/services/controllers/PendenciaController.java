@@ -52,7 +52,7 @@ public class PendenciaController {
     public ResponseEntity<List<PendenciaDtoResponse>> findAll(){
         Type type = new TypeToken<List<PendenciaDtoResponse>>() {}.getType();
         List<PendenciaDtoResponse> result = objectMapperUtils.toList(_pendenciaService.findAll(), type);
-        return new ResponseEntity<List<PendenciaDtoResponse>>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.POST)
@@ -74,7 +74,7 @@ public class PendenciaController {
             pendenciaModel.setUsuario_finish(usuario_id_finish);
         }
         Pendencia savedPendencia = _pendenciaService.create(pendenciaModel);
-        return new ResponseEntity<Pendencia>(savedPendencia, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedPendencia, HttpStatus.CREATED);
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
@@ -97,13 +97,13 @@ public class PendenciaController {
         }
         Long id = pendenciaModel.getId();
         Pendencia savedPendencia = _pendenciaService.update(id,pendenciaModel);
-        return new ResponseEntity<Pendencia>(savedPendencia, HttpStatus.OK);
+        return new ResponseEntity<>(savedPendencia, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         _pendenciaService.delete(id);
-        return new ResponseEntity<String>("ID: "+id+" deletado.", HttpStatus.OK);
+        return new ResponseEntity<>("ID: "+id+" deletado.", HttpStatus.OK);
     }
 
 }

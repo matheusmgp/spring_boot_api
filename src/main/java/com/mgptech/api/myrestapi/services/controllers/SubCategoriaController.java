@@ -47,7 +47,7 @@ public class SubCategoriaController {
         SubCategoria subCategoriaModel = subCategoriaIO.mapTo(subCategoriaDtoRequest);
         subCategoriaModel.setCategoria(categoria);
         SubCategoria savedSubCategoria = _subCategoriaService.create(subCategoriaModel);
-        return new ResponseEntity<SubCategoria>(savedSubCategoria, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedSubCategoria, HttpStatus.CREATED);
     }
 
     @RequestMapping( method = RequestMethod.GET)
@@ -55,7 +55,7 @@ public class SubCategoriaController {
         Type type = new TypeToken<List<SubCategoriaDtoResponse>>() {}.getType();
 
         List<SubCategoriaDtoResponse> result = objectMapperUtils.toList(_subCategoriaService.findAll(), type);
-        return new ResponseEntity<List<SubCategoriaDtoResponse>>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
@@ -66,12 +66,12 @@ public class SubCategoriaController {
         subCategoriaModel.setCategoria(categoria);
         Long id = subCategoriaModel.getId();
         SubCategoria savedSubCategoria = _subCategoriaService.update(id,subCategoriaModel);
-        return new ResponseEntity<SubCategoria>(savedSubCategoria, HttpStatus.OK);
+        return new ResponseEntity<>(savedSubCategoria, HttpStatus.OK);
     }
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         _subCategoriaService.delete(id);
-        return new ResponseEntity<String>("ID: "+id+" deletado.", HttpStatus.OK);
+        return new ResponseEntity<>("ID: "+id+" deletado.", HttpStatus.OK);
     }
 
 

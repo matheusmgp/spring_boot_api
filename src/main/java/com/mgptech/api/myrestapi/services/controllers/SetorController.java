@@ -41,7 +41,7 @@ public class SetorController {
     public ResponseEntity<Setor> add( @Valid @ModelAttribute("SetorDto") @RequestBody SetorDtoRequest setorDtoRequest){
         Setor setorModel = setorIO.mapTo(setorDtoRequest);
         Setor savedSetor = _setorService.create(setorModel);
-        return new ResponseEntity<Setor>(savedSetor, HttpStatus.CREATED);
+        return new ResponseEntity<>(savedSetor, HttpStatus.CREATED);
     }
 
 
@@ -51,7 +51,7 @@ public class SetorController {
         Type type = new TypeToken<List<SetorDtoResponse>>() {}.getType();
 
         List<SetorDtoResponse> result = objectMapperUtils.toList(_setorService.findAll(), type);
-        return new ResponseEntity<List<SetorDtoResponse>>(result, HttpStatus.OK);
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
 
@@ -60,7 +60,7 @@ public class SetorController {
         Setor setorModel = setorIO.mapTo(setorDtoRequest);
         Long id = setorModel.getId();
         Setor savedSetor = _setorService.update(id,setorModel);
-        return new ResponseEntity<Setor>(savedSetor, HttpStatus.OK);
+        return new ResponseEntity<>(savedSetor, HttpStatus.OK);
     }
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") Long id){
