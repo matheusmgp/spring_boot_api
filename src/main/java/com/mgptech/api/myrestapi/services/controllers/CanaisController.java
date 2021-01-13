@@ -52,9 +52,12 @@ public class CanaisController {
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Canais> update(@RequestBody CanaisDtoRequest canaisDtoRequire) throws Exception {
+    public ResponseEntity<Canais> update(@RequestBody CanaisDtoRequest canaisDtoRequest) throws Exception {
 
-        Canais canaisModel = canaisIO.mapTo(canaisDtoRequire);
+      /*  if(!_canaisService.exists(canaisDtoRequest.getId())){
+            return ResponseEntity.notFound().build();
+        }*/
+        Canais canaisModel = canaisIO.mapTo(canaisDtoRequest);
         Long id = canaisModel.getId();
         Canais savedCanal = _canaisService.update(id,canaisModel);
         return new ResponseEntity<>(savedCanal, HttpStatus.OK);

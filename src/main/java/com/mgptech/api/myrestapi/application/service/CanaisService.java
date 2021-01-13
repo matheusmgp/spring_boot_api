@@ -6,6 +6,7 @@ import com.mgptech.api.myrestapi.domain.interfaces.repositories.ICanaisRepositor
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.IFilialRepository;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotUpdatedException;
 import com.mgptech.api.myrestapi.services.interfaces.ICanaisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,17 +47,29 @@ public class CanaisService implements ICanaisService {
     }
 
     public Canais update(Long id,Canais newCanal) throws Exception {
-        Canais canal = _canaisRepository.getOne(id);
-        if (canal == null) {
-            throw new Exception();
-        }
+         Canais updatedCanal = new Canais();
+        Canais canal =  _canaisRepository.findById(id) .orElseThrow(
+                () -> new EntityNotFoundException("ID not found "+ id));
+
+      //  Canais canal = _canaisRepository.getOne(id);
+        //if (canal == null) {
+        //    throw new Exception();
+       // }
         if (canal.getId() != id) {
             throw new IllegalArgumentException();
         }
 
         newCanal.setId(id);
-        Canais canalDB = _canaisRepository.save(newCanal);
-        return canalDB;
+        try {
+            updatedCanal = _canaisRepository.save(newCanal);
+        }catch (RuntimeException ex) {
+            new EntityNotUpdatedException("Could not update entity");
+        }
+
+        return updatedCanal;
+    }
+    public Boolean exists(Long id){
+        return _canaisRepository.existsById(id);
     }
 }
 
