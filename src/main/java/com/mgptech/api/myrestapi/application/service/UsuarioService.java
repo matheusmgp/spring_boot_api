@@ -69,7 +69,7 @@ public class UsuarioService implements IUsuarioService {
     }
 
     Optional<Usuario> findByEmail(String email){
-        return null;
+       return _usuarioRepository.findByEmail(email);
     }
 }
 

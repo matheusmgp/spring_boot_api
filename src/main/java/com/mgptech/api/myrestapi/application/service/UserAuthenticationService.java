@@ -2,6 +2,7 @@ package com.mgptech.api.myrestapi.application.service;
 
 import com.mgptech.api.myrestapi.application.dto.DadosLogin;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
+import com.mgptech.api.myrestapi.domain.interfaces.repositories.IUsuarioRepository;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.ExistingEmailException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.ExpiredTokenException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.InvalidLoginException;
@@ -18,16 +19,20 @@ public class UserAuthenticationService {
     private UsuarioService usuarioService;
     private TokenService tokenService;
 
+
     @Autowired
     public UserAuthenticationService(UsuarioService usuarioService, TokenService tokenService) {
         this.usuarioService = usuarioService;
         this.tokenService = tokenService;
+
     }
 
 
     public Usuario authenticate(DadosLogin dados, String token) {
         Usuario user = usuarioService.findByEmail(dados.getEmail()).orElseThrow(ExistingEmailException::new);
         if (dados.getSenha().equals(user.getSenha()) && !token.isEmpty() && validate(token)) {
+            String tokenGenerated = tokenService.generateToken(user);
+            user.setToken(tokenGenerated);
             return user;
         } else {
             throw new InvalidLoginException();

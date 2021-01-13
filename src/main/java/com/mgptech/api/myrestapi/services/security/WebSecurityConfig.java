@@ -19,18 +19,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests().anyRequest().authenticated()
-                .and()
-                .httpBasic();
+                .csrf().disable();
+               // .authorizeRequests().anyRequest().authenticated()
+               // .and()
+              //  .httpBasic();
     }
 
-    @Bean
+  /*  @Bean
     CorsConfigurationSource corsConfigurationSource() {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
         return source;
-    }
+    }*/
 
    /* @Override
     protected void configure(HttpSecurity http) throws Exception {
