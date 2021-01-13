@@ -69,8 +69,15 @@ public class CanaisService implements ICanaisService {
 
        // return updatedCanal;
     }
+
     public Boolean exists(Long id){
         return _canaisRepository.existsById(id);
+    }
+
+
+    @Override
+    public List<Canais> findByNomeContaining(String nome) {
+        return _canaisRepository.findByNomeContaining(nome);
     }
 }
 

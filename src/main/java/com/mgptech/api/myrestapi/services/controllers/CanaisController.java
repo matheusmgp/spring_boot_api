@@ -78,4 +78,9 @@ public class CanaisController {
         return new ResponseEntity<>("ID: "+id+" deletado.", HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/teste/{nome}", method = RequestMethod.GET)
+    public List<Canais> getByName(@PathVariable(value = "nome") String nome){
+        List<Canais> retorno = _canaisService.findByNomeContaining(nome);
+       return retorno;
+    }
 }
