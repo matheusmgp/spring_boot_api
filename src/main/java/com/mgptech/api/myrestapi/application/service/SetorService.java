@@ -2,6 +2,7 @@ package com.mgptech.api.myrestapi.application.service;
 
 
 import com.mgptech.api.myrestapi.domain.entities.Filial;
+import com.mgptech.api.myrestapi.domain.entities.Pendencia;
 import com.mgptech.api.myrestapi.domain.entities.Setor;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.ISetorRepository;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
@@ -31,32 +32,21 @@ public class SetorService implements ISetorService {
                 () -> new EntityNotFoundException("ID not found "+ id));
     }
 
-    public Setor create(Setor setor) {
-        try {
-            Setor savedSetor =  _setorRepository.save(setor);
-        }catch (RuntimeException ex) {
-            new EntityNotCreatedException("Could not create entity");
-        }
-        return setor;
-    }
 
     public Long delete(Long id) {
         _setorRepository.deleteById(id);
         return id;
     }
 
-    public Setor update(Long id,Setor newSetor) throws Exception {
-        Setor setor = _setorRepository.getOne(id);
-        if (setor == null) {
-            throw new Exception();
-        }
-        if (setor.getId() != id) {
-            throw new IllegalArgumentException();
-        }
+    public Setor create(Setor setor) {
+        return  _setorRepository.save(setor);
+    }
 
-        newSetor.setId(id);
-        Setor SetorDB = _setorRepository.save(newSetor);
-        return SetorDB;
+
+    public Setor update(Long id,Setor setorUpdated) {
+        setorUpdated.setId(id);
+        return _setorRepository.save(setorUpdated);
+
     }
 }
 

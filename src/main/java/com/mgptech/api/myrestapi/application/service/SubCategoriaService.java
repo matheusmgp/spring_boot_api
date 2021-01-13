@@ -1,6 +1,7 @@
 package com.mgptech.api.myrestapi.application.service;
 
 import com.mgptech.api.myrestapi.domain.entities.Canais;
+import com.mgptech.api.myrestapi.domain.entities.Setor;
 import com.mgptech.api.myrestapi.domain.entities.SubCategoria;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.ICanaisRepository;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.ISubCategoriaRepository;
@@ -28,32 +29,22 @@ public class SubCategoriaService implements ISubCategoriaService {
                 () -> new EntityNotFoundException("ID not found "+ id));
     }
 
-    public SubCategoria  create(SubCategoria sub) {
-        try {
-            SubCategoria savedSub =  _subCategoriaRepository.save(sub);
-        }catch (RuntimeException ex) {
-            new EntityNotCreatedException("Could not create entity");
-        }
-        return sub;
-    }
+
 
     public Long delete(Long id) {
         _subCategoriaRepository.deleteById(id);
         return id;
     }
 
-    public SubCategoria update(Long id,SubCategoria newSub) throws Exception {
-        SubCategoria subCategoria = _subCategoriaRepository.getOne(id);
-        if (subCategoria == null) {
-            throw new Exception();
-        }
-        if (subCategoria.getId() != id) {
-            throw new IllegalArgumentException();
-        }
+    public SubCategoria create(SubCategoria subCategoria) {
+        return  _subCategoriaRepository.save(subCategoria);
+    }
 
-        newSub.setId(id);
-        SubCategoria subCategoriaDB = _subCategoriaRepository.save(newSub);
-        return subCategoriaDB;
+
+    public SubCategoria update(Long id,SubCategoria subCategoriaUpdated) {
+        subCategoriaUpdated.setId(id);
+        return _subCategoriaRepository.save(subCategoriaUpdated);
+
     }
 
 

@@ -4,6 +4,7 @@
 package com.mgptech.api.myrestapi.application.service;
 
 import com.mgptech.api.myrestapi.domain.entities.Filial;
+import com.mgptech.api.myrestapi.domain.entities.SubCategoria;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import com.mgptech.api.myrestapi.services.interfaces.IUsuarioService;
@@ -40,32 +41,22 @@ public class UsuarioService implements IUsuarioService {
                 () -> new EntityNotFoundException("ID not found "+ id));
     }
 
-    public Usuario create(Usuario usuario) {
-        try {
-            Usuario savedUsuario =  _usuarioRepository.save(usuario);
-        }catch (RuntimeException ex) {
-            new EntityNotCreatedException("Could not create entity");
-        }
-        return usuario;
-    }
+
 
     public Long delete(Long id) {
     	_usuarioRepository.deleteById(id);
         return id;
     }
 
-    public Usuario update(Long id,Usuario newUsuario) throws Exception {
-    	Usuario usuario = _usuarioRepository.getOne(id);
-        if (usuario == null) {
-            throw new Exception();
-        }
-        if (usuario.getId() != id) {
-            throw new IllegalArgumentException();
-        }
+    public Usuario create(Usuario usuario) {
+        return  _usuarioRepository.save(usuario);
+    }
 
-        newUsuario.setId(id);
-        Usuario UsuarioDB = _usuarioRepository.save(newUsuario);
-        return UsuarioDB;
+
+    public Usuario update(Long id,Usuario usuarioUpdated) {
+        usuarioUpdated.setId(id);
+        return _usuarioRepository.save(usuarioUpdated);
+
     }
 
     Optional<Usuario> findByEmail(String email){

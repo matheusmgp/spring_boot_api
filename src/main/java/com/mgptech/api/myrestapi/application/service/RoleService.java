@@ -1,5 +1,6 @@
 package com.mgptech.api.myrestapi.application.service;
 
+import com.mgptech.api.myrestapi.domain.entities.Canais;
 import com.mgptech.api.myrestapi.domain.entities.Role;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.IRoleRepository;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
@@ -9,12 +10,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class IRoleService {
+public class RoleService {
 
 
     private IRoleRepository _roleRepository;
 
-    public IRoleService(IRoleRepository _roleRepository) {
+    public RoleService(IRoleRepository _roleRepository) {
         this._roleRepository = _roleRepository;
     }
 
@@ -29,12 +30,14 @@ public class IRoleService {
     }
 
     public Role create(Role role) {
-        try {
-            Role savedRole =  _roleRepository.save(role);
-        }catch (RuntimeException ex) {
-            new EntityNotCreatedException("Could not create entity");
-        }
-        return role;
+        return  _roleRepository.save(role);
+    }
+
+
+    public Role update(Long id,Role roleUpdated) {
+        roleUpdated.setId(id);
+        return _roleRepository.save(roleUpdated);
+
     }
 
     public Long delete(Long id) {
@@ -42,19 +45,7 @@ public class IRoleService {
         return id;
     }
 
-    public Role update(Long id,Role updatedRole) throws Exception {
-        Role role = _roleRepository.getOne(id);
-        if (role == null) {
-            throw new Exception();
-        }
-        if (role.getId() != id) {
-            throw new IllegalArgumentException();
-        }
 
-        updatedRole.setId(id);
-        Role roleDB = _roleRepository.save(updatedRole);
-        return roleDB;
-    }
 }
 
 

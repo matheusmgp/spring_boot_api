@@ -25,6 +25,11 @@ public class RoleIO {
             role.setStatus(roleDtoRequest.getStatus());
             if(roleDtoRequest.getId() != null){
                 role.setId(roleDtoRequest.getId());
+                role.setUpdatedAt(java.util.Calendar.getInstance().getTime());
+
+            }else{
+                role.setCreatedAt(java.util.Calendar.getInstance().getTime());
+
             }
             return role;
         }

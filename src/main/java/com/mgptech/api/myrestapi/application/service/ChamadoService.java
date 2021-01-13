@@ -5,7 +5,6 @@ package com.mgptech.api.myrestapi.application.service;
 
 import com.mgptech.api.myrestapi.application.dto.request.ChamadoDtoRequest;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -42,13 +41,13 @@ public class ChamadoService  implements IChamadoService<Chamado, ChamadoDtoReque
     }
 
     public Chamado create(Chamado chamado) {
-        Chamado savedChamado = new Chamado();
-        try {
-             savedChamado =  _chamadoRepository.save(chamado);
-        }catch (RuntimeException ex) {
-            new EntityNotCreatedException("Could not create entity");
-        }
-        return savedChamado;
+        return  _chamadoRepository.save(chamado);
+    }
+
+
+    public Chamado update(Long id,Chamado chamadoUpdated) {
+        chamadoUpdated.setId(id);
+        return _chamadoRepository.save(chamadoUpdated);
 
     }
 
@@ -57,19 +56,7 @@ public class ChamadoService  implements IChamadoService<Chamado, ChamadoDtoReque
         return id;
     }
 
-    public Chamado update(Long id,Chamado newChamado) throws Exception {
-        Chamado chamado = _chamadoRepository.getOne(id);
-        if (chamado == null) {
-            throw new Exception();
-        }
-        if (chamado.getId() != id) {
-            throw new IllegalArgumentException();
-        }
 
-        newChamado.setId(id);
-        Chamado chamadoDB = _chamadoRepository.save(newChamado);
-        return chamadoDB;
-    }
 
     @Override
     public List<Chamado> getSetoresMesCount() {
