@@ -9,6 +9,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class PendenciaDtoRequest extends IdentityDto {
@@ -24,6 +25,7 @@ public class PendenciaDtoRequest extends IdentityDto {
     private String solucao;
 
     @JsonProperty(defaultValue = "status")
+    @NotNull
     private Boolean status;
 
     @Basic

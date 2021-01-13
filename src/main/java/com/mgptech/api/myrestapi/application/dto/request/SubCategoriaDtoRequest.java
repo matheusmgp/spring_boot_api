@@ -6,6 +6,7 @@ import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class SubCategoriaDtoRequest extends IdentityDto {
 
@@ -17,6 +18,7 @@ public class SubCategoriaDtoRequest extends IdentityDto {
     private String nome;
 
     @JsonProperty(defaultValue = "status")
+    @NotNull
     private Boolean status;
 
     @JsonProperty(defaultValue = "categoria_id")

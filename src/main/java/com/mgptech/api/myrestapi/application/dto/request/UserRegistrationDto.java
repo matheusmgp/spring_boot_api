@@ -3,12 +3,17 @@ package com.mgptech.api.myrestapi.application.dto.request;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+
 @JsonAutoDetect(fieldVisibility= JsonAutoDetect.Visibility.ANY)
 public class UserRegistrationDto {
 
     private Long id;
 
     private String nome;
+    @Email
+    @NotBlank
     private String email;
     private String senha;
 

@@ -9,6 +9,7 @@ import javax.persistence.Basic;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -48,6 +49,7 @@ public class ChamadoDtoRequest extends IdentityDto {
     private Long usuario_id_redirect;
 
     @JsonProperty(defaultValue = "status")
+    @NotNull
     private Boolean status;
 
     @JsonProperty(defaultValue = "setor")

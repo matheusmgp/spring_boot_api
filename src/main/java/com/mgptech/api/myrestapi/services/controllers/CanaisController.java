@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -45,22 +46,30 @@ public class CanaisController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Canais> add(@RequestBody CanaisDtoRequest canaisDtoRequire) throws Exception{
+    public ResponseEntity<Canais> add(@Valid @RequestBody CanaisDtoRequest canaisDtoRequire){
         Canais canalModel = canaisIO.mapTo(canaisDtoRequire);
         Canais savedCanais = _canaisService.create(canalModel);
         return new ResponseEntity<>(savedCanais, HttpStatus.CREATED);
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Canais> update(@RequestBody CanaisDtoRequest canaisDtoRequest) throws Exception {
+    public ResponseEntity<Canais> update(@Valid @RequestBody CanaisDtoRequest canaisDtoRequest)  {
 
-      /*  if(!_canaisService.exists(canaisDtoRequest.getId())){
-            return ResponseEntity.notFound().build();
-        }*/
         Canais canaisModel = canaisIO.mapTo(canaisDtoRequest);
-        Long id = canaisModel.getId();
-        Canais savedCanal = _canaisService.update(id,canaisModel);
-        return new ResponseEntity<>(savedCanal, HttpStatus.OK);
+        if(canaisModel.getId() <= 0){
+            return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
+        }
+        Canais canalRetorno = _canaisService.findById(canaisModel.getId());
+        if(canalRetorno != null){
+            Long id = canaisModel.getId();
+           // canaisModel.setStatus(true);
+            Canais savedCanal = _canaisService.update(id,canaisModel);
+            return new ResponseEntity<>(savedCanal, HttpStatus.OK);
+
+        }
+
+        return new ResponseEntity<>(null, HttpStatus.OK);
+
     }
 
     @DeleteMapping(path = "{id}")
