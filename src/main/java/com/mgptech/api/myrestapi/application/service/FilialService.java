@@ -20,9 +20,7 @@ import com.mgptech.api.myrestapi.services.interfaces.IFilialService;
 @Service
 public class FilialService implements IFilialService{
 
-	/**
-	 * 
-	 */
+
 	private IFilialRepository _filialRepository;
     //@Autowired
     public FilialService(IFilialRepository repository) {

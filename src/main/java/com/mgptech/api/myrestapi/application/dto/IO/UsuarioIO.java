@@ -20,9 +20,8 @@ public class UsuarioIO {
 	        	UsuarioDtoRequest usuarioDtoRequest = context.getSource();
 	            // @formatter:off
 	        	Usuario usuario = new Usuario();
-	        	usuario.setAcesso(usuarioDtoRequest.getAcesso());
-	        	usuario.setFirstName(usuarioDtoRequest.getFirstName());
-	        	usuario.setLastName( usuarioDtoRequest.getLastName());
+
+	        	usuario.setNome(usuarioDtoRequest.getNome());
 				usuario.setEmail( usuarioDtoRequest.getEmail());
 				usuario.setSenha( usuarioDtoRequest.getSenha());
 				usuario.setSenha( usuarioDtoRequest.getSenha());

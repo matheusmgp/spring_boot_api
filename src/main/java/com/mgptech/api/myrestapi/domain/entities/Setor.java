@@ -24,6 +24,12 @@ public class Setor extends  BaseEntity implements Serializable {
     @Column(name = "status", nullable = false)
     private Boolean status;
 
+    @Column(name = "tempo", nullable = false)
+    private String tempo;
+
+    @Column(name = "tempo_rapido", nullable = false)
+    private String tempo_rapido;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "setor")
@@ -51,5 +57,21 @@ public class Setor extends  BaseEntity implements Serializable {
 
     public void setStatus(Boolean status) {
         this.status = status;
+    }
+
+    public String getTempo() {
+        return tempo;
+    }
+
+    public void setTempo(String tempo) {
+        this.tempo = tempo;
+    }
+
+    public String getTempo_rapido() {
+        return tempo_rapido;
+    }
+
+    public void setTempo_rapido(String tempo_rapido) {
+        this.tempo_rapido = tempo_rapido;
     }
 }

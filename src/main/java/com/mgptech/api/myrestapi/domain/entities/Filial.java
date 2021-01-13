@@ -1,6 +1,7 @@
 package com.mgptech.api.myrestapi.domain.entities;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.*;
@@ -28,6 +29,34 @@ public class Filial extends BaseEntity implements Serializable{
 
     @Column(name = "cnpj", nullable = false)
     private String cnpj;
+
+    @Column(name = "status", nullable = false)
+    private Boolean status;
+
+    @Column(name = "mac", nullable = true)
+    private String mac;
+
+    @Column(name = "dia_vencimento", nullable = true)
+    private Integer diaVencimento;
+
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_bloqueio", nullable = false)
+    private java.util.Date dataBloqueio;
+
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "data_expiracao", nullable = false)
+    private java.util.Date dataExpiracao;
+
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date updatedAt;
+
+    @Basic
+    @Temporal(TemporalType.TIMESTAMP)
+    private java.util.Date createdAt;
+
 
     @JsonManagedReference
     @OneToMany(mappedBy = "filial")
@@ -57,6 +86,60 @@ public class Filial extends BaseEntity implements Serializable{
     	this.cnpj = cnpj;
     }
 
-  
-    
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public String getMac() {
+        return mac;
+    }
+
+    public void setMac(String mac) {
+        this.mac = mac;
+    }
+
+    public Integer getDiaVencimento() {
+        return diaVencimento;
+    }
+
+    public void setDiaVencimento(Integer diaVencimento) {
+        this.diaVencimento = diaVencimento;
+    }
+
+    public Date getDataBloqueio() {
+        return dataBloqueio;
+    }
+
+    public void setDataBloqueio(Date dataBloqueio) {
+        this.dataBloqueio = dataBloqueio;
+    }
+
+    public Date getDataExpiracao() {
+        return dataExpiracao;
+    }
+
+    public void setDataExpiracao(Date dataExpiracao) {
+        this.dataExpiracao = dataExpiracao;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
 }

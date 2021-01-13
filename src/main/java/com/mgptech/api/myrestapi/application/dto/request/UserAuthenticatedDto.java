@@ -19,10 +19,10 @@ public class UserAuthenticatedDto {
     public UserAuthenticatedDto(){}
 
     public static UserAuthenticatedDto toDTO(Usuario user, String tipo) {
-        return new UserAuthenticatedDto(user.getEmail(), user.getFirstName(), user.getToken(), tipo);
+        return new UserAuthenticatedDto(user.getEmail(), user.getNome(), user.getToken(), tipo);
     }
     public static UserAuthenticatedDto toDTO(UsuarioDtoRequest user, String tipo) {
-        return new UserAuthenticatedDto(user.getEmail(), user.getFirstName(), user.getToken(), tipo);
+        return new UserAuthenticatedDto(user.getEmail(), user.getNome(), user.getToken(), tipo);
     }
 
     public String getEmail() {

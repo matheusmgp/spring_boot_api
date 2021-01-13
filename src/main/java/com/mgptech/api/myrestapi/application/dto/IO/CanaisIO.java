@@ -17,13 +17,13 @@ public class CanaisIO {
 
         @Override
         public Canais convert(MappingContext<CanaisDtoRequest, Canais> context) {
-            CanaisDtoRequest canaisDtoRequire = context.getSource();
+            CanaisDtoRequest canaisDtoRequest = context.getSource();
             // @formatter:off
             Canais canais = new Canais();
-            canais.setNome(canaisDtoRequire.getNome());
-            canais.setStatus(canaisDtoRequire.getStatus());
-            if(canaisDtoRequire.getId() != null){
-                canais.setId(canaisDtoRequire.getId());
+            canais.setNome(canaisDtoRequest.getNome());
+            canais.setStatus(canaisDtoRequest.getStatus());
+            if(canaisDtoRequest.getId() != null){
+                canais.setId(canaisDtoRequest.getId());
             }
             return canais;
         }

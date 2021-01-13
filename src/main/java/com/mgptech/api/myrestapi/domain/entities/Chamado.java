@@ -25,48 +25,39 @@ public class Chamado extends BaseEntity implements Serializable{
 
     @Column(name = "protocolo", nullable = false)
     private String protocolo;
-
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dataAbertura;
-
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
     private java.util.Date dataFechamento;
-
     @Column(name = "status", nullable = false)
     private Boolean status;
-
     @ManyToOne()
     @JsonIgnore
     @JsonIgnoreProperties(ignoreUnknown=true)
     @JoinColumn(name = "filial_id")
     private Filial filial;
-
     @ManyToOne()
     @JsonIgnore
     @JsonIgnoreProperties(ignoreUnknown=true)
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
-
     @ManyToOne()
     @JsonIgnore
     @JsonIgnoreProperties(ignoreUnknown=true)
     @JoinColumn(name = "usuario_id_finish")
     private Usuario usuario_finish;
-
     @ManyToOne()
     @JsonIgnore
     @JsonIgnoreProperties(ignoreUnknown=true)
     @JoinColumn(name = "usuario_id_redirect")
     private Usuario usuario_redirect;
-
     @ManyToOne()
     @JsonIgnore
     @JsonIgnoreProperties(ignoreUnknown=true)
     @JoinColumn(name = "setor_id")
     private Setor setor;
-
     @JsonManagedReference
     @OneToMany(mappedBy = "chamado")
     private List<Pendencia> pendencias;

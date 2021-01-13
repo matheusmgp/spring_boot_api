@@ -16,25 +16,26 @@ public class UsuarioDtoRequest extends IdentityDto {
     @JsonProperty(defaultValue = "firstName")
     @NotBlank(message = "Nome é obrigatório.")
     @Size(min=2, max=14)
-    private String firstName;
-    
-    @JsonProperty(defaultValue = "lastName")
-    @NotBlank(message = "SobreNome é obrigatório.")
-    @Size(min=2, max=14)
-    private String lastName;
-
-    @JsonProperty(defaultValue = "acesso")
-    private Boolean acesso;
-
+    private String nome;
     @JsonProperty(defaultValue = "email")
     @NotBlank(message = "email é obrigatório.")
     private String email;
+    @JsonProperty(defaultValue = "token")
+    private String token;
     @JsonProperty(defaultValue = "senha")
     @NotBlank(message = "senha é obrigatório.")
     private String senha;
+    @JsonProperty(defaultValue = "senha")
+    @NotBlank(message = "role é obrigatório.")
+    private Long role;
 
-    @JsonProperty(defaultValue = "token")
-    private String token;
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     public String getEmail() {
         return email;
@@ -52,6 +53,14 @@ public class UsuarioDtoRequest extends IdentityDto {
         this.senha = senha;
     }
 
+    public Long getRole() {
+        return role;
+    }
+
+    public void setRole(Long role) {
+        this.role = role;
+    }
+
     public String getToken() {
         return token;
     }
@@ -59,28 +68,4 @@ public class UsuarioDtoRequest extends IdentityDto {
     public void setToken(String token) {
         this.token = token;
     }
-
-    public String getFirstName() {
-    	return this.firstName;
-    }
-    public void setFirstName(String firstName) {
-    	this.firstName = firstName;
-    }
-
-
-    public String getLastName() {
-    	return this.lastName;
-    }
-    public void setLastName(String lastName) {
-    	this.lastName = lastName;
-    }
-
-
-    public Boolean getAcesso() {
-    	return this.acesso;
-    }
-    public void setAcesso(Boolean acesso) {
-    	this.acesso = acesso;
-    }
-
 }

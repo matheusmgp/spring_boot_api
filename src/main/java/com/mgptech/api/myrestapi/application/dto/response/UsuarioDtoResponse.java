@@ -21,14 +21,7 @@ public class UsuarioDtoResponse extends IdentityDto {
 
 	@ApiModelProperty(required = true)
     @NotEmpty
-    private String firstName;
-    
-	@ApiModelProperty(required = true)
-    @NotEmpty
-    private String lastName;
-   
-    private Boolean acesso;
-
+    private String nome;
     @ApiModelProperty(required = true)
     @NotEmpty
     private String email;
@@ -68,27 +61,11 @@ public class UsuarioDtoResponse extends IdentityDto {
         return chamados;
     }
 
-    public String getFirstName() {
-    	return this.firstName;
-    }
-    public void setFirstName(String firstName) {
-    	this.firstName = firstName;
+    public String getNome() {
+        return nome;
     }
 
-
-    public String getLastName() {
-    	return this.lastName;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
-    public void setLastName(String lastName) {
-    	this.lastName = lastName;
-    }
-
-
-    public Boolean getAcesso() {
-    	return this.acesso;
-    }
-    public void setAcesso(Boolean acesso) {
-    	this.acesso = acesso;
-    }
-
 }
