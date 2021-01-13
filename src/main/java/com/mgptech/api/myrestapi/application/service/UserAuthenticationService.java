@@ -31,8 +31,8 @@ public class UserAuthenticationService {
     public Usuario authenticate(DadosLogin dados, String token) {
         Usuario user = usuarioService.findByEmail(dados.getEmail()).orElseThrow(ExistingEmailException::new);
         if (dados.getSenha().equals(user.getSenha()) && !token.isEmpty() && validate(token)) {
-            String tokenGenerated = tokenService.generateToken(user);
-            user.setToken(tokenGenerated);
+         //   String tokenGenerated = tokenService.generateToken(user);
+         //   user.setToken(tokenGenerated);
             return user;
         } else {
             throw new InvalidLoginException();

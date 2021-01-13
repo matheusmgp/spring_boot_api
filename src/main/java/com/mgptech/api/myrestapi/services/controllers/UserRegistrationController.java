@@ -1,7 +1,9 @@
 package com.mgptech.api.myrestapi.services.controllers;
 
+import com.mgptech.api.myrestapi.application.dto.IO.UsuarioIO;
 import com.mgptech.api.myrestapi.application.dto.request.UserAuthenticatedDto;
 import com.mgptech.api.myrestapi.application.dto.request.UserRegistrationDto;
+import com.mgptech.api.myrestapi.application.dto.request.UsuarioDtoRequest;
 import com.mgptech.api.myrestapi.application.service.UserRegistrationService;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,8 @@ public class UserRegistrationController {
     private UserRegistrationService userRegistrationService;
 
     @Autowired
+    UsuarioIO usuarioIO;
+    @Autowired
     public UserRegistrationController(UserRegistrationService userRegistrationService){
         this.userRegistrationService = userRegistrationService;
     }
@@ -26,7 +30,9 @@ public class UserRegistrationController {
     @PostMapping("user")
     public ResponseEntity<UserAuthenticatedDto> registrate(@RequestBody UserRegistrationDto userRegistrationDTO){
         Usuario user = userRegistrationService.registrate(userRegistrationDTO.toUser());
-        return  new ResponseEntity<>(UserAuthenticatedDto.toDTO(user, "Bearer "), HttpStatus.CREATED);
+
+        UsuarioDtoRequest usuarioDtoRequest = usuarioIO.mapTo(user);
+        return  new ResponseEntity<>(UserAuthenticatedDto.toDTO(usuarioDtoRequest, "Bearer "), HttpStatus.CREATED);
     }
 
 }

@@ -17,6 +17,7 @@ public class UserRegistrationService {
 
     public Usuario registrate(Usuario user){
         user.setToken(tokenService.generateToken(user));
+
         return usuarioService.create(user);
     }
 

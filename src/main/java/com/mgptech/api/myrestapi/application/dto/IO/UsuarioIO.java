@@ -25,6 +25,8 @@ public class UsuarioIO {
 	        	usuario.setLastName( usuarioDtoRequest.getLastName());
 				usuario.setEmail( usuarioDtoRequest.getEmail());
 				usuario.setSenha( usuarioDtoRequest.getSenha());
+				usuario.setSenha( usuarioDtoRequest.getSenha());
+				usuario.setToken( usuarioDtoRequest.getToken());
 
 				if(usuarioDtoRequest.getId() != null){
 					usuario.setId(usuarioDtoRequest.getId());
@@ -44,5 +46,8 @@ public class UsuarioIO {
 	    public Usuario mapTo(UsuarioDtoRequest usuarioDtoRequest) {
 	        return this.modelMapper.map(usuarioDtoRequest, Usuario.class);
 	    }
+	public UsuarioDtoRequest mapTo(Usuario usuario) {
+		return this.modelMapper.map(usuario, UsuarioDtoRequest.class);
+	}
 
 }
