@@ -1,9 +1,7 @@
 package com.mgptech.api.myrestapi.application.service;
 
-import com.mgptech.api.myrestapi.domain.entities.Canais;
 import com.mgptech.api.myrestapi.domain.entities.Role;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.IRoleRepository;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 

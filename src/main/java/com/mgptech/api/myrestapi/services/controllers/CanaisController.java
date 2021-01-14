@@ -8,7 +8,6 @@ import com.mgptech.api.myrestapi.application.service.*;
 import com.mgptech.api.myrestapi.domain.entities.Canais;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,14 +21,16 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8080")
 public class CanaisController {
 
-    @Autowired
+
     private CanaisService _canaisService;
-
-    @Autowired
     ObjectMapperUtils objectMapperUtils ;
-
-    @Autowired
     CanaisIO canaisIO;
+
+    public CanaisController(CanaisService _canaisService, ObjectMapperUtils objectMapperUtils, CanaisIO canaisIO) {
+        this._canaisService = _canaisService;
+        this.objectMapperUtils = objectMapperUtils;
+        this.canaisIO = canaisIO;
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 

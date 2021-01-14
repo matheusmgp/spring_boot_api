@@ -20,15 +20,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/setor")
 public class SetorController {
-    @Autowired
+
     private SetorService _setorService;
-
-    @Autowired
-    ObjectMapperUtils objectMapperUtils ;
-
-    @Autowired
+    ObjectMapperUtils objectMapperUtils;
     SetorIO setorIO;
 
+    public SetorController(SetorService _setorService, ObjectMapperUtils objectMapperUtils, SetorIO setorIO) {
+        this._setorService = _setorService;
+        this.objectMapperUtils = objectMapperUtils;
+        this.setorIO = setorIO;
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<SetorDtoResponse> getById(@PathVariable(value = "id") long id){

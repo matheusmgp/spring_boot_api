@@ -18,29 +18,26 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/pendencia")
 public class PendenciaController {
-    @Autowired
+
     private PendenciaService _pendenciaService;
-
-    @Autowired
     private CanaisService _canaisService;
-
-    @Autowired
     private CategoriaService _categoriaService;
-
-    @Autowired
     private SubCategoriaService _subCategoriaService;
-
-    @Autowired
     private ChamadoService _chamadoService;
-
-    @Autowired
     private UsuarioService _usuarioService;
-
-    @Autowired
     ObjectMapperUtils objectMapperUtils ;
-
-    @Autowired
     PendenciaIO pendenciaIO;
+
+    public PendenciaController(PendenciaService _pendenciaService, CanaisService _canaisService, CategoriaService _categoriaService, SubCategoriaService _subCategoriaService, ChamadoService _chamadoService, UsuarioService _usuarioService, ObjectMapperUtils objectMapperUtils, PendenciaIO pendenciaIO) {
+        this._pendenciaService = _pendenciaService;
+        this._canaisService = _canaisService;
+        this._categoriaService = _categoriaService;
+        this._subCategoriaService = _subCategoriaService;
+        this._chamadoService = _chamadoService;
+        this._usuarioService = _usuarioService;
+        this.objectMapperUtils = objectMapperUtils;
+        this.pendenciaIO = pendenciaIO;
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<PendenciaDtoResponse> getById(@PathVariable(value = "id") long id){

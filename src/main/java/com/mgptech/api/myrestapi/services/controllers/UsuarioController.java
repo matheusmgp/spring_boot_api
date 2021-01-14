@@ -25,18 +25,19 @@ import javax.validation.Valid;
 @RequestMapping("/api/usuario")
 public class UsuarioController {
 	
-	@Autowired
-	private UsuarioService _usuarioService;
-	
-	@Autowired
-	ObjectMapperUtils  objectMapperUtils ;
 
-	@Autowired
+	private UsuarioService _usuarioService;
+	ObjectMapperUtils  objectMapperUtils ;
 	private PasswordEncoder _passwordEncoder;
-	
-    @Autowired
     UsuarioIO usuarioIO;
-	
+
+	public UsuarioController(UsuarioService _usuarioService, ObjectMapperUtils objectMapperUtils, PasswordEncoder _passwordEncoder, UsuarioIO usuarioIO) {
+		this._usuarioService = _usuarioService;
+		this.objectMapperUtils = objectMapperUtils;
+		this._passwordEncoder = _passwordEncoder;
+		this.usuarioIO = usuarioIO;
+	}
+
 	@RequestMapping(value = "/{id}",  method = RequestMethod.GET)
 	public ResponseEntity<UsuarioDtoResponse> getById(@PathVariable(value = "id") long id){
 		  UsuarioDtoResponse usuarioDtoResponse =  objectMapperUtils.mapTo(_usuarioService.findById(id), UsuarioDtoResponse.class);

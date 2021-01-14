@@ -29,21 +29,21 @@ import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 @RequestMapping("/api/filial")
 public class FilialController {
 
-	@Autowired
+
 	private FilialService _filialService;
-
-	@Autowired
 	private FilialEnderecoService _filialEnderecoService;
-	
-	@Autowired
 	ObjectMapperUtils  objectMapperUtils ;
-	
-    @Autowired
     FilialIO filialIO;
-
-	@Autowired
 	FilialEnderecoIO filialEnderecoIO;
-	
+
+	public FilialController(FilialService _filialService, FilialEnderecoService _filialEnderecoService, ObjectMapperUtils objectMapperUtils, FilialIO filialIO, FilialEnderecoIO filialEnderecoIO) {
+		this._filialService = _filialService;
+		this._filialEnderecoService = _filialEnderecoService;
+		this.objectMapperUtils = objectMapperUtils;
+		this.filialIO = filialIO;
+		this.filialEnderecoIO = filialEnderecoIO;
+	}
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<FilialDtoResponse> getById(@PathVariable(value = "id") long id){
 		FilialDtoResponse filialDtoResponse = objectMapperUtils.mapTo(_filialService.findById(id), FilialDtoResponse.class);

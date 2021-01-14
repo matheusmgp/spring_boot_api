@@ -1,21 +1,16 @@
 package com.mgptech.api.myrestapi.application.service;
 
 import com.mgptech.api.myrestapi.domain.entities.Canais;
-import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.ICanaisRepository;
-import com.mgptech.api.myrestapi.domain.interfaces.repositories.IFilialRepository;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotUpdatedException;
 import com.mgptech.api.myrestapi.services.interfaces.ICanaisService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 @Service
 public class CanaisService implements ICanaisService {
 
-    @Autowired
+
     private ICanaisRepository _canaisRepository;
 
     public CanaisService(ICanaisRepository _canaisRepository) {

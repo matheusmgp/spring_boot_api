@@ -21,7 +21,7 @@ public class FilialService implements IFilialService{
 
 
 	private IFilialRepository _filialRepository;
-    //@Autowired
+
     public FilialService(IFilialRepository repository) {
 
         _filialRepository = repository;

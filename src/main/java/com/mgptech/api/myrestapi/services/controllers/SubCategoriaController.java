@@ -21,18 +21,19 @@ import java.util.List;
 @RestController()
 @RequestMapping("/api/subCategoria")
 public class SubCategoriaController {
-    @Autowired
+
     private SubCategoriaService _subCategoriaService;
-
-    @Autowired
     private CategoriaService _categoriaService;
-
-    @Autowired
     ObjectMapperUtils objectMapperUtils ;
-
-    @Autowired
     SubCategoriaIO subCategoriaIO;
 
+
+    public SubCategoriaController(SubCategoriaService _subCategoriaService, CategoriaService _categoriaService, ObjectMapperUtils objectMapperUtils, SubCategoriaIO subCategoriaIO) {
+        this._subCategoriaService = _subCategoriaService;
+        this._categoriaService = _categoriaService;
+        this.objectMapperUtils = objectMapperUtils;
+        this.subCategoriaIO = subCategoriaIO;
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<SubCategoriaDtoResponse> getById(@PathVariable(value = "id") long id){

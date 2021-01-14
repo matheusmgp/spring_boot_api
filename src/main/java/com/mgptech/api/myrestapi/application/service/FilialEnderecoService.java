@@ -1,6 +1,5 @@
 package com.mgptech.api.myrestapi.application.service;
 
-import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.domain.entities.FilialEndereco;
 import com.mgptech.api.myrestapi.domain.interfaces.repositories.IFilialEnderecoRepository;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;

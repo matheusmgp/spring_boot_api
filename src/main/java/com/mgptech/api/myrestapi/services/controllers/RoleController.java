@@ -26,14 +26,16 @@ import java.util.List;
 @RequestMapping("/api/role")
 public class RoleController {
 
-    @Autowired
+
     private RoleService _roleService;
-
-    @Autowired
     ObjectMapperUtils objectMapperUtils ;
-
-    @Autowired
     RoleIO roleIO;
+
+    public RoleController(RoleService _roleService, ObjectMapperUtils objectMapperUtils, RoleIO roleIO) {
+        this._roleService = _roleService;
+        this.objectMapperUtils = objectMapperUtils;
+        this.roleIO = roleIO;
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<RoleDtoResponse> getById(@PathVariable(value = "id") long id){

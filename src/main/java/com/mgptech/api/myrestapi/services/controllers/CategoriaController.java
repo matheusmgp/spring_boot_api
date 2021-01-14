@@ -7,7 +7,6 @@ import com.mgptech.api.myrestapi.application.service.CategoriaService;
 import com.mgptech.api.myrestapi.domain.entities.Categoria;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,17 +18,17 @@ import java.util.List;
 @RequestMapping("/api/categoria")
 public class CategoriaController {
 
-    @Autowired
+
+
     private CategoriaService _categoriaService;
-
-
-
-    @Autowired
     ObjectMapperUtils objectMapperUtils ;
-
-    @Autowired
     CategoriaIO categoriaIO;
 
+    public CategoriaController(CategoriaService _categoriaService, ObjectMapperUtils objectMapperUtils, CategoriaIO categoriaIO) {
+        this._categoriaService = _categoriaService;
+        this.objectMapperUtils = objectMapperUtils;
+        this.categoriaIO = categoriaIO;
+    }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<CategoriaDtoResponse> getById(@PathVariable(value = "id") long id){

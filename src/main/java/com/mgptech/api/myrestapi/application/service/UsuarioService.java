@@ -3,9 +3,6 @@
  */
 package com.mgptech.api.myrestapi.application.service;
 
-import com.mgptech.api.myrestapi.domain.entities.Filial;
-import com.mgptech.api.myrestapi.domain.entities.SubCategoria;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import com.mgptech.api.myrestapi.services.interfaces.IUsuarioService;
 

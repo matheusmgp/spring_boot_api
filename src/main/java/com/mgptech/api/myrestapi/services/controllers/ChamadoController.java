@@ -11,7 +11,6 @@ import com.mgptech.api.myrestapi.domain.entities.Setor;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
 import org.modelmapper.TypeToken;
 import java.lang.reflect.Type;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,25 +30,24 @@ import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 @RequestMapping("/api/chamado")
 public class ChamadoController {
 
-	@Autowired
+
 	private ChamadoService _chamadoService;
-
-    @Autowired
     private SetorService _setorService;
-
-    @Autowired
     private FilialService _filialService;
-
-    @Autowired
     private UsuarioService _usuarioService;
-	
-	@Autowired
 	ObjectMapperUtils  objectMapperUtils ;
-	
-    @Autowired
     ChamadoIO chamadoIO;
-	
-	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
+
+    public ChamadoController(ChamadoService _chamadoService, SetorService _setorService, FilialService _filialService, UsuarioService _usuarioService, ObjectMapperUtils objectMapperUtils, ChamadoIO chamadoIO) {
+        this._chamadoService = _chamadoService;
+        this._setorService = _setorService;
+        this._filialService = _filialService;
+        this._usuarioService = _usuarioService;
+        this.objectMapperUtils = objectMapperUtils;
+        this.chamadoIO = chamadoIO;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<ChamadoDtoResponse> getById(@PathVariable(value = "id") long id){
         ChamadoDtoResponse chamadoDtoResponse = objectMapperUtils.mapTo(_chamadoService.findById(id), ChamadoDtoResponse.class);
         return new ResponseEntity<>(chamadoDtoResponse, HttpStatus.OK);
