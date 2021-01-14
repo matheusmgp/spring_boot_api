@@ -4,6 +4,7 @@ import javax.validation.constraints.NotEmpty;
 
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
+import com.mgptech.api.myrestapi.domain.entities.FilialEndereco;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -42,6 +43,16 @@ public class FilialDtoResponse extends IdentityDto {
     private  java.util.Date dataExpiracao;
 
     private List<Chamado> chamados;
+
+    private FilialEndereco filialEndereco;
+
+    public FilialEndereco getFilialEndereco() {
+        return filialEndereco;
+    }
+
+    public void setFilialEndereco(FilialEndereco filialEndereco) {
+        this.filialEndereco = filialEndereco;
+    }
 
     public List<Chamado> getChamados() {
         return chamados;
