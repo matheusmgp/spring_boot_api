@@ -3,7 +3,11 @@ package com.mgptech.api.myrestapi.services.controllers;
 import java.lang.reflect.Type;
 import java.util.List;
 
+import com.mgptech.api.myrestapi.application.dto.IO.FilialEnderecoIO;
+import com.mgptech.api.myrestapi.application.dto.request.FilialEnderecoDtoRequest;
 import com.mgptech.api.myrestapi.application.dto.response.FilialDtoResponse;
+import com.mgptech.api.myrestapi.application.service.FilialEnderecoService;
+import com.mgptech.api.myrestapi.domain.entities.FilialEndereco;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,12 +31,18 @@ public class FilialController {
 
 	@Autowired
 	private FilialService _filialService;
+
+	@Autowired
+	private FilialEnderecoService _filialEnderecoService;
 	
 	@Autowired
 	ObjectMapperUtils  objectMapperUtils ;
 	
     @Autowired
     FilialIO filialIO;
+
+	@Autowired
+	FilialEnderecoIO filialEnderecoIO;
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ResponseEntity<FilialDtoResponse> getById(@PathVariable(value = "id") long id){
@@ -41,9 +51,26 @@ public class FilialController {
 	}	
 	
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Filial> add(@RequestBody FilialDtoRequest filialDTORequire){
-    	Filial filialModel = filialIO.mapTo(filialDTORequire);
+    public ResponseEntity<Filial> add(@RequestBody FilialDtoRequest filialDtoRequest){
+		FilialEnderecoDtoRequest filialEnderecoDtoRequest = new FilialEnderecoDtoRequest();
+		filialEnderecoDtoRequest.setLogradouto(filialDtoRequest.getLogradouro());
+		filialEnderecoDtoRequest.setNumero(filialDtoRequest.getNumero());
+		filialEnderecoDtoRequest.setCidade(filialDtoRequest.getCidade());
+		filialEnderecoDtoRequest.setBairro(filialDtoRequest.getBairro());
+		filialEnderecoDtoRequest.setUf(filialDtoRequest.getUf());
+		filialEnderecoDtoRequest.setCep(filialDtoRequest.getCep());
+		if(filialDtoRequest.getComplemento() != null){
+			filialEnderecoDtoRequest.setComplemento(filialDtoRequest.getComplemento());
+		}
+		FilialEndereco filialEnderecoModel = filialEnderecoIO.mapTo(filialEnderecoDtoRequest);
+		FilialEndereco savedFilialEndereco =_filialEnderecoService.create(filialEnderecoModel);
+    	Filial filialModel = filialIO.mapTo(filialDtoRequest);
+		filialModel.setStatus(true);
+		filialModel.setFilialEndereco(savedFilialEndereco);
     	Filial savedFilial = _filialService.create(filialModel);
+		//Long id = savedFilial.getId();
+		//filialEnderecoModel.setFilial(savedFilial);
+
 		return new ResponseEntity<>(savedFilial, HttpStatus.CREATED);
     }
     

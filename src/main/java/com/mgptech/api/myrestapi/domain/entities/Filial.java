@@ -41,12 +41,12 @@ public class Filial extends BaseEntity implements Serializable{
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_bloqueio", nullable = false)
+    @Column(name = "data_bloqueio", nullable = true)
     private java.util.Date dataBloqueio;
 
     @Basic
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_expiracao", nullable = false)
+    @Column(name = "data_expiracao", nullable = true)
     private java.util.Date dataExpiracao;
 
     @Basic
@@ -61,6 +61,18 @@ public class Filial extends BaseEntity implements Serializable{
     @JsonManagedReference
     @OneToMany(mappedBy = "filial")
     private List<Chamado> chamados;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "endereco_id", referencedColumnName = "id")
+    private FilialEndereco filialEndereco;
+
+    public FilialEndereco getFilialEndereco() {
+        return filialEndereco;
+    }
+
+    public void setFilialEndereco(FilialEndereco filialEndereco) {
+        this.filialEndereco = filialEndereco;
+    }
 
     public List<Chamado> getChamado() {
         return chamados;

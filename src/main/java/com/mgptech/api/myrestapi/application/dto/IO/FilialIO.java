@@ -24,6 +24,9 @@ public class FilialIO {
 	        	filial.setCnpj(filialDtoRequire.getCnpj());
 	        	filial.setFantasia(filialDtoRequire.getFantasia());
 	        	filial.setRazao( filialDtoRequire.getRazao());
+				filial.setDataBloqueio( filialDtoRequire.getDataBloqueio());
+				filial.setDataExpiracao( filialDtoRequire.getDataExpiracao());
+				filial.setDiaVencimento( filialDtoRequire.getDiaVencimento());
 				if(filialDtoRequire.getId() != null){
 					filial.setId(filialDtoRequire.getId());
 				}

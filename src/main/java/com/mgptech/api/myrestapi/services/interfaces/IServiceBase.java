@@ -9,6 +9,6 @@ public interface IServiceBase<Entity extends BaseEntity> {
     Entity findById(Long id);
     Entity create(Entity BaseEntity);
     Long delete(Long id);
-    Entity update(Long id,Entity BaseEntity) throws Exception;
+    Entity update(Long id,Entity BaseEntity);
 
 }

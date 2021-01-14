@@ -1,42 +1,41 @@
-package com.mgptech.api.myrestapi.domain.entities;
+package com.mgptech.api.myrestapi.application.dto.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.stereotype.Component;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.validation.constraints.NotEmpty;
 
-@Entity
-@Component
-@Table(name = "filial_endereco")
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class FilialEndereco  extends  BaseEntity implements Serializable {
+@ApiModel(value = "FilialEnderecoDtoResponse")
+public class FilialEnderecoDtoResponse extends IdentityDto {
 
-    @Column(name = "logradouro", nullable = false)
-    private String logradouro;
-    @Column(name = "cidade", nullable = false)
+    @ApiModelProperty(required = true)
+    @NotEmpty
+    private String logradouto;
+    @ApiModelProperty(required = true)
+    @NotEmpty
     private String cidade;
-    @Column(name = "bairro", nullable = false)
+    @ApiModelProperty(required = true)
+    @NotEmpty
     private String bairro;
-    @Column(name = "cep", nullable = false)
+    @ApiModelProperty(required = true)
+    @NotEmpty
     private String cep;
-    @Column(name = "numero", nullable = false)
+    @ApiModelProperty(required = true)
+    @NotEmpty
     private String numero;
-    @Column(name = "complemento", nullable = true)
+    @ApiModelProperty(required = true)
     private String complemento;
-    @Column(name = "uf", nullable = false)
+    @ApiModelProperty(required = true)
+    @NotEmpty
     private String uf;
 
-
-    @OneToOne(mappedBy = "filialEndereco")
-    private Filial filial;
-
     public String getLogradouto() {
-        return logradouro;
+        return logradouto;
     }
 
     public void setLogradouto(String logradouto) {
-        this.logradouro = logradouto;
+        this.logradouto = logradouto;
     }
 
     public String getCidade() {

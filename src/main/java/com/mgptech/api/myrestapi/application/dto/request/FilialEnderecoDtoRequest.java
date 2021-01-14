@@ -1,35 +1,38 @@
-package com.mgptech.api.myrestapi.domain.entities;
+package com.mgptech.api.myrestapi.application.dto.request;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 
-import javax.persistence.*;
-import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 
-@Entity
-@Component
-@Table(name = "filial_endereco")
-@JsonIgnoreProperties(ignoreUnknown=true)
-public class FilialEndereco  extends  BaseEntity implements Serializable {
 
-    @Column(name = "logradouro", nullable = false)
+public class FilialEnderecoDtoRequest extends IdentityDto {
+
+
+    @JsonProperty(defaultValue = "logradouro")
+    @NotBlank(message = "logradouro é obrigatório.")
     private String logradouro;
-    @Column(name = "cidade", nullable = false)
+    @JsonProperty(defaultValue = "cidade")
+    @NotBlank(message = "cidade é obrigatório.")
     private String cidade;
-    @Column(name = "bairro", nullable = false)
+    @JsonProperty(defaultValue = "bairro")
+    @NotBlank(message = "bairro é obrigatório.")
     private String bairro;
-    @Column(name = "cep", nullable = false)
+    @JsonProperty(defaultValue = "cep")
+    @NotBlank(message = "cep é obrigatório.")
     private String cep;
-    @Column(name = "numero", nullable = false)
+    @JsonProperty(defaultValue = "numero")
+    @NotBlank(message = "numero é obrigatório.")
     private String numero;
-    @Column(name = "complemento", nullable = true)
+    @JsonProperty(defaultValue = "complemento")
     private String complemento;
-    @Column(name = "uf", nullable = false)
+    @JsonProperty(defaultValue = "uf")
+    @NotBlank(message = "uf é obrigatório.")
     private String uf;
 
 
-    @OneToOne(mappedBy = "filialEndereco")
-    private Filial filial;
 
     public String getLogradouto() {
         return logradouro;
