@@ -4,6 +4,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import com.mgptech.api.myrestapi.application.dto.response.UsuarioDtoResponse;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.ExistingEmailException;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,17 +45,39 @@ public class UsuarioController {
 	
     @RequestMapping( method =  RequestMethod.POST)
     public ResponseEntity<Usuario> add( @Valid  @RequestBody UsuarioDtoRequest usuarioDTORequest){
+		Usuario savedModel;
     	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTORequest);
-		UsuarioDtoRequest usuarioDtoRequest = new UsuarioDtoRequest();
+
 		var userEmailExists = _usuarioService.emailExists(usuarioModel.getEmail());
 		if(!userEmailExists) {
 			var senhaEncoded = _passwordEncoder.encode(usuarioDTORequest.getSenha());
-			usuarioModel.setSenha(senhaEncoded);
+			 usuarioModel.setSenha(senhaEncoded);
+			 savedModel = _usuarioService.create(usuarioModel);
+			return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
 		}
-    	Usuario savedModel = _usuarioService.create(usuarioModel);
-		return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
+		throw new EntityNotCreatedException("Email já existe");
     }
-    
+	@RequestMapping( method =  RequestMethod.PUT)
+	public ResponseEntity<Usuario> update(@RequestBody UsuarioDtoRequest usuarioDTORequest) {
+		Usuario usuarioModel = usuarioIO.mapTo(usuarioDTORequest);
+
+		var oldEmail = _usuarioService.findById(usuarioDTORequest.getId()).getEmail();
+
+		var userEmailExists = _usuarioService.emailExists(usuarioModel.getEmail());
+ 		var newEmail =usuarioModel.getEmail();
+
+ 		var igual = newEmail.equals(oldEmail);
+		if( userEmailExists && igual || !userEmailExists ){
+			Long id = usuarioModel.getId();
+			var senhaEncoded = _passwordEncoder.encode(usuarioDTORequest.getSenha());
+			usuarioModel.setSenha(senhaEncoded);
+			Usuario savedUsuario = _usuarioService.update(id,usuarioModel);
+			return new ResponseEntity<>(savedUsuario, HttpStatus.OK);
+		}else {
+			throw new EntityNotCreatedException("Email já existe");
+		}
+
+	}
    
 
 	@RequestMapping(method = RequestMethod.GET)
@@ -66,13 +89,7 @@ public class UsuarioController {
     }
 
 
-    @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Usuario> update(@RequestBody UsuarioDtoRequest usuarioDTORequest) throws Exception{
-    	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTORequest);
-    	 Long id = usuarioModel.getId();
-    	 Usuario savedUsuario = _usuarioService.update(id,usuarioModel);
-		return new ResponseEntity<>(savedUsuario, HttpStatus.OK);
-    }
+
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") Long id){
     	_usuarioService.delete(id);

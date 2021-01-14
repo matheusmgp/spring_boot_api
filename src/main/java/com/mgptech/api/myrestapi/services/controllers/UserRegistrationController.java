@@ -12,6 +12,7 @@ import com.mgptech.api.myrestapi.services.controllers.exceptions.ExistingEmailEx
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,15 +40,25 @@ public class UserRegistrationController {
         Usuario usuario = userRegistrationDTORequest.toUser();
         UsuarioDtoRequest usuarioDtoRequest = new UsuarioDtoRequest();
         var userEmailExists = _usuarioService.emailExists(usuario.getEmail());
+
+
+
         if(userEmailExists){
             Usuario usr = _usuarioService.findByEmail(usuario.getEmail()).orElseThrow(
                     () -> new ExistingEmailException("Email não encontrado"));
-            usuario.setId(usr.getId());
-            var senhaEncoded = _passwordEncoder.encode(userRegistrationDTORequest.getSenha());
-            usuario.setSenha(senhaEncoded);
-            Usuario user = userRegistrationService.registrate(usuario);
-            usuarioDtoRequest = usuarioIO.mapTo(user);
-            return  new ResponseEntity<>(UserAuthenticateDtoRequest.toDTO(usuarioDtoRequest, "Bearer "), HttpStatus.CREATED);
+
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            Boolean equals = passwordEncoder.matches(userRegistrationDTORequest.getSenha(),usr.getSenha());
+
+            if(equals){
+                usuario.setId(usr.getId());
+                var senhaEncoded = _passwordEncoder.encode(userRegistrationDTORequest.getSenha());
+                usuario.setSenha(senhaEncoded);
+                Usuario user = userRegistrationService.registrate(usuario);
+                usuarioDtoRequest = usuarioIO.mapTo(user);
+                return  new ResponseEntity<>(UserAuthenticateDtoRequest.toDTO(usuarioDtoRequest, "Bearer "), HttpStatus.CREATED);
+            }
+
         }else {
 
         }

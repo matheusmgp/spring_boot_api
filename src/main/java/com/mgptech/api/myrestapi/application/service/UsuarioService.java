@@ -41,8 +41,6 @@ public class UsuarioService implements IUsuarioService {
                 () -> new EntityNotFoundException("ID not found "+ id));
     }
 
-
-
     public Long delete(Long id) {
     	_usuarioRepository.deleteById(id);
         return id;
@@ -51,7 +49,6 @@ public class UsuarioService implements IUsuarioService {
     public Usuario create(Usuario usuario) {
         return  _usuarioRepository.save(usuario);
     }
-
 
     public Usuario update(Long id,Usuario usuarioUpdated) {
         usuarioUpdated.setId(id);
