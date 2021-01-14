@@ -7,21 +7,22 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @JsonAutoDetect(fieldVisibility= JsonAutoDetect.Visibility.ANY)
-public class UserRegistrationDto {
+public class UserRegistrationDtoRequest {
 
     private Long id;
-
+    @NotBlank
     private String nome;
     @Email
     @NotBlank
     private String email;
+    @NotBlank
     private String senha;
 
-    public UserRegistrationDto() {
+    public UserRegistrationDtoRequest() {
 
     }
 
-    public UserRegistrationDto(String nome, String email, String senha) {
+    public UserRegistrationDtoRequest(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;

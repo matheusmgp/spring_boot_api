@@ -24,7 +24,7 @@ public class UsuarioIO {
 	        	usuario.setNome(usuarioDtoRequest.getNome());
 				usuario.setEmail( usuarioDtoRequest.getEmail());
 				usuario.setSenha( usuarioDtoRequest.getSenha());
-				usuario.setSenha( usuarioDtoRequest.getSenha());
+
 				usuario.setToken( usuarioDtoRequest.getToken());
 
 				if(usuarioDtoRequest.getId() != null){

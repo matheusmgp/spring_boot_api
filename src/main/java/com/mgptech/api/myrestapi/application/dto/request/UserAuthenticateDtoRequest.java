@@ -2,13 +2,13 @@ package com.mgptech.api.myrestapi.application.dto.request;
 
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
 
-public class UserAuthenticatedDto {
+public class UserAuthenticateDtoRequest {
     private String tipo;
     private String email;
     private String nome;
     private String token;
 
-    public UserAuthenticatedDto(String email, String nome, String token, String tipo) {
+    public UserAuthenticateDtoRequest(String email, String nome, String token, String tipo) {
 
         this.email = email;
         this.nome = nome;
@@ -16,13 +16,13 @@ public class UserAuthenticatedDto {
         this.tipo = tipo;
     }
 
-    public UserAuthenticatedDto(){}
+    public UserAuthenticateDtoRequest(){}
 
-    public static UserAuthenticatedDto toDTO(Usuario user, String tipo) {
-        return new UserAuthenticatedDto(user.getEmail(), user.getNome(), user.getToken(), tipo);
+    public static UserAuthenticateDtoRequest toDTO(Usuario user, String tipo) {
+        return new UserAuthenticateDtoRequest(user.getEmail(), user.getNome(), user.getToken(), tipo);
     }
-    public static UserAuthenticatedDto toDTO(UsuarioDtoRequest user, String tipo) {
-        return new UserAuthenticatedDto(user.getEmail(), user.getNome(), user.getToken(), tipo);
+    public static UserAuthenticateDtoRequest toDTO(UsuarioDtoRequest user, String tipo) {
+        return new UserAuthenticateDtoRequest(user.getEmail(), user.getNome(), user.getToken(), tipo);
     }
 
     public String getEmail() {

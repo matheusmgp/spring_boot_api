@@ -13,9 +13,9 @@ import javax.validation.constraints.Size;
 public class UsuarioDtoRequest extends IdentityDto {
 
 
-    @JsonProperty(defaultValue = "firstName")
+    @JsonProperty(defaultValue = "nome")
     @NotBlank(message = "Nome é obrigatório.")
-    @Size(min=2, max=14)
+   // @Size(min=2, max=14)
     private String nome;
     @JsonProperty(defaultValue = "email")
     @NotBlank(message = "email é obrigatório.")
@@ -26,7 +26,7 @@ public class UsuarioDtoRequest extends IdentityDto {
     @NotBlank(message = "senha é obrigatório.")
     private String senha;
     @JsonProperty(defaultValue = "senha")
-    @NotBlank(message = "role é obrigatório.")
+    //@NotBlank(message = "role é obrigatório.")
     private Long role;
 
     public String getNome() {

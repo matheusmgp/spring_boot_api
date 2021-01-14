@@ -1,15 +1,15 @@
-package com.mgptech.api.myrestapi.application.dto;
+package com.mgptech.api.myrestapi.application.dto.request;
 
-public class DadosLogin {
+public class DadosLoginRequest {
 
     private String email;
     private String senha;
 
-    public DadosLogin() {
+    public DadosLoginRequest() {
 
     }
 
-    public DadosLogin(String email, String senha) {
+    public DadosLoginRequest(String email, String senha) {
         this.email = email;
         this.senha = senha;
     }

@@ -59,8 +59,16 @@ public class UsuarioService implements IUsuarioService {
 
     }
 
-    Optional<Usuario> findByEmail(String email){
+    public Optional<Usuario> findByEmail(String email){
        return _usuarioRepository.findByEmail(email);
+    }
+    public Boolean emailExists(String email){
+        var retorno = _usuarioRepository.findByEmail(email);
+        if(!retorno.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

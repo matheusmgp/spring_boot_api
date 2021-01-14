@@ -1,14 +1,12 @@
 package com.mgptech.api.myrestapi.application.service;
 
-import com.mgptech.api.myrestapi.application.dto.DadosLogin;
+import com.mgptech.api.myrestapi.application.dto.request.DadosLoginRequest;
 import com.mgptech.api.myrestapi.domain.entities.Usuario;
-import com.mgptech.api.myrestapi.domain.interfaces.repositories.IUsuarioRepository;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.ExistingEmailException;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.ExpiredTokenException;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.InvalidLoginException;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.InvalidTokenException;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.*;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -16,21 +14,24 @@ import java.util.Date;
 @Service
 public class UserAuthenticationService {
 
+    @Autowired
     private UsuarioService usuarioService;
+    @Autowired
     private TokenService tokenService;
 
-
-    @Autowired
-    public UserAuthenticationService(UsuarioService usuarioService, TokenService tokenService) {
-        this.usuarioService = usuarioService;
-        this.tokenService = tokenService;
-
-    }
+    public Usuario authenticate(DadosLoginRequest dados, String token) {
+        Usuario user = usuarioService.findByEmail(dados.getEmail()).orElseThrow(
+                () -> new ExistingEmailException("Email não encontrado"));
 
 
-    public Usuario authenticate(DadosLogin dados, String token) {
-        Usuario user = usuarioService.findByEmail(dados.getEmail()).orElseThrow(ExistingEmailException::new);
-        if (dados.getSenha().equals(user.getSenha()) && !token.isEmpty() && validate(token)) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        Boolean equals = passwordEncoder.matches(dados.getSenha(),user.getSenha());
+
+        var tokenNotEmpty = !token.isEmpty();
+        var validToken = validate(token);
+
+
+        if (equals && tokenNotEmpty && validToken) {
          //   String tokenGenerated = tokenService.generateToken(user);
          //   user.setToken(tokenGenerated);
             return user;

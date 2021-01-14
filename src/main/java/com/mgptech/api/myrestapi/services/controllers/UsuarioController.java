@@ -4,10 +4,12 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 import com.mgptech.api.myrestapi.application.dto.response.UsuarioDtoResponse;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.ExistingEmailException;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import com.mgptech.api.myrestapi.application.dto.request.UsuarioDtoRequest;
@@ -27,6 +29,9 @@ public class UsuarioController {
 	
 	@Autowired
 	ObjectMapperUtils  objectMapperUtils ;
+
+	@Autowired
+	private PasswordEncoder _passwordEncoder;
 	
     @Autowired
     UsuarioIO usuarioIO;
@@ -40,6 +45,12 @@ public class UsuarioController {
     @RequestMapping( method =  RequestMethod.POST)
     public ResponseEntity<Usuario> add( @Valid  @RequestBody UsuarioDtoRequest usuarioDTORequest){
     	Usuario usuarioModel = usuarioIO.mapTo(usuarioDTORequest);
+		UsuarioDtoRequest usuarioDtoRequest = new UsuarioDtoRequest();
+		var userEmailExists = _usuarioService.emailExists(usuarioModel.getEmail());
+		if(!userEmailExists) {
+			var senhaEncoded = _passwordEncoder.encode(usuarioDTORequest.getSenha());
+			usuarioModel.setSenha(senhaEncoded);
+		}
     	Usuario savedModel = _usuarioService.create(usuarioModel);
 		return new ResponseEntity<>(savedModel, HttpStatus.CREATED);
     }
