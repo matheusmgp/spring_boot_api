@@ -15,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -42,7 +43,7 @@ public class SubCategoriaController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<SubCategoria> add(@RequestBody SubCategoriaDtoRequest subCategoriaDtoRequest){
+    public ResponseEntity<SubCategoria> add(@Valid @RequestBody SubCategoriaDtoRequest subCategoriaDtoRequest){
         Categoria categoria = _categoriaService.findById(subCategoriaDtoRequest.getCategoria_id());
 
         SubCategoria subCategoriaModel = subCategoriaIO.mapTo(subCategoriaDtoRequest);
@@ -60,7 +61,7 @@ public class SubCategoriaController {
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<SubCategoria> update(@RequestBody SubCategoriaDtoRequest subCategoriaDtoRequest) throws Exception{
+    public ResponseEntity<SubCategoria> update(@Valid  @RequestBody SubCategoriaDtoRequest subCategoriaDtoRequest) throws Exception{
         Categoria categoria = _categoriaService.findById(subCategoriaDtoRequest.getCategoria_id());
 
         SubCategoria subCategoriaModel = subCategoriaIO.mapTo(subCategoriaDtoRequest);
@@ -69,6 +70,7 @@ public class SubCategoriaController {
         SubCategoria savedSubCategoria = _subCategoriaService.update(id,subCategoriaModel);
         return new ResponseEntity<>(savedSubCategoria, HttpStatus.OK);
     }
+
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
         _subCategoriaService.delete(id);

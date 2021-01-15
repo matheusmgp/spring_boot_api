@@ -16,6 +16,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class UserRegistrationController {
 
@@ -36,7 +38,7 @@ public class UserRegistrationController {
     }
 
     @PostMapping("api/registration/user")
-    public ResponseEntity<UserAuthenticateDtoRequest> registrate(@RequestBody UserRegistrationDtoRequest userRegistrationDTORequest){
+    public ResponseEntity<UserAuthenticateDtoRequest> registrate(@Valid  @RequestBody UserRegistrationDtoRequest userRegistrationDTORequest){
         Usuario usuario = userRegistrationDTORequest.toUser();
         UsuarioDtoRequest usuarioDtoRequest = new UsuarioDtoRequest();
         var userEmailExists = _usuarioService.emailExists(usuario.getEmail());

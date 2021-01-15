@@ -45,8 +45,6 @@ public class SetorController {
         return new ResponseEntity<>(savedSetor, HttpStatus.CREATED);
     }
 
-
-
     @RequestMapping( method = RequestMethod.GET)
     public ResponseEntity<List<SetorDtoResponse>> findAll(){
         Type type = new TypeToken<List<SetorDtoResponse>>() {}.getType();
@@ -55,14 +53,14 @@ public class SetorController {
         return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Setor> update(@RequestBody SetorDtoRequest setorDtoRequest) throws Exception{
+    public ResponseEntity<Setor> update(@Valid @RequestBody SetorDtoRequest setorDtoRequest) throws Exception{
         Setor setorModel = setorIO.mapTo(setorDtoRequest);
         Long id = setorModel.getId();
         Setor savedSetor = _setorService.update(id,setorModel);
         return new ResponseEntity<>(savedSetor, HttpStatus.OK);
     }
+
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") Long id){
         _setorService.delete(id);

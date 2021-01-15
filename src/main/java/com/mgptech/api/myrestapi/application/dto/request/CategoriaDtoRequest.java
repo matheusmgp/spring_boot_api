@@ -3,10 +3,7 @@ package com.mgptech.api.myrestapi.application.dto.request;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 
 /**
  * CategoriaDto
@@ -16,8 +13,8 @@ public class CategoriaDtoRequest extends IdentityDto {
 
     @JsonProperty(defaultValue = "nome")
     @NotBlank(message = "Nome é obrigatório.")
-    @Min(value = 8, message = "Nome não pode ser menor que 8.")
-    @Max(value = 35, message = "Nome não pode ser maior que 35.")
+    @NotNull
+    @Size(min=2, max=35)
     private String nome;
 
     @JsonProperty(defaultValue = "status")

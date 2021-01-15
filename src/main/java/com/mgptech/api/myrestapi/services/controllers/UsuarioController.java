@@ -5,9 +5,7 @@ import java.util.List;
 
 import com.mgptech.api.myrestapi.application.dto.response.UsuarioDtoResponse;
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
-import com.mgptech.api.myrestapi.services.controllers.exceptions.ExistingEmailException;
 import org.modelmapper.TypeToken;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -58,8 +56,9 @@ public class UsuarioController {
 		}
 		throw new EntityNotCreatedException("Email já existe");
     }
-	@RequestMapping( method =  RequestMethod.PUT)
-	public ResponseEntity<Usuario> update(@RequestBody UsuarioDtoRequest usuarioDTORequest) {
+
+    @RequestMapping( method =  RequestMethod.PUT)
+	public ResponseEntity<Usuario> update(@Valid @RequestBody UsuarioDtoRequest usuarioDTORequest) {
 		Usuario usuarioModel = usuarioIO.mapTo(usuarioDTORequest);
 
 		var oldEmail = _usuarioService.findById(usuarioDTORequest.getId()).getEmail();
@@ -79,7 +78,6 @@ public class UsuarioController {
 		}
 
 	}
-   
 
 	@RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<UsuarioDtoResponse>> findAll(){
@@ -88,8 +86,6 @@ public class UsuarioController {
         List<UsuarioDtoResponse> result = objectMapperUtils.toList(_usuarioService.findAll(), type);
 		return new ResponseEntity<>(result, HttpStatus.OK);
     }
-
-
 
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") Long id){

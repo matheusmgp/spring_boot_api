@@ -9,6 +9,7 @@ public class CanaisDtoRequest extends IdentityDto {
 
     @JsonProperty(defaultValue = "nome")
     @NotBlank(message = "Nome é obrigatório.")
+    @NotNull
     @Size(min=2, max=35)
     private String nome;
     @JsonProperty(defaultValue = "status")
