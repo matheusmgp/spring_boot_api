@@ -1,48 +1,25 @@
 package com.mgptech.api.myrestapi.services.security;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.cors.CorsConfigurationSource;
-import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-@EnableWebSecurity
 @Configuration
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig  {
 
+    public WebMvcConfigurer corsConfigurer(){
+        return new WebMvcConfigurer(){
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .csrf().disable();
-               // .authorizeRequests().anyRequest().authenticated()
-               // .and()
-              //  .httpBasic();
+            @Override
+            public void addCorsMappings(CorsRegistry corsRegistry){
+                corsRegistry.addMapping("/**")
+                        .allowedMethods("GET","POST","PUT","PATCH","DELETE")
+                        .allowedHeaders("*")
+                        .allowedOrigins("*");
+            }
+        };
     }
 
-  /*  @Bean
-    CorsConfigurationSource corsConfigurationSource() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", new CorsConfiguration().applyPermitDefaultValues());
-        return source;
-    }*/
 
-   /* @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
-    }*/
-   @Autowired
-   public void configureGlobal(AuthenticationManagerBuilder auth)
-           throws Exception
-   {
-      // auth.inMemoryAuthentication()
-             //  .withUser("admin")
-             //  .password("101010")
-             //  .roles("USER");
-   }
+
 }
