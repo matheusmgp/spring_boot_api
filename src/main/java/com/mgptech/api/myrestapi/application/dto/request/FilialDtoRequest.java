@@ -3,10 +3,10 @@ package com.mgptech.api.myrestapi.application.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mgptech.api.myrestapi.application.dto.IdentityDto;
+import com.mgptech.api.myrestapi.domain.entities.FilialEndereco;
 
-import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
-import javax.validation.constraints.NotBlank;
+import javax.persistence.Column;
+import javax.validation.constraints.*;
 import java.util.Date;
 
 /**
@@ -17,80 +17,89 @@ public class FilialDtoRequest extends IdentityDto {
 
     @JsonProperty(defaultValue = "fantasia")
     @NotBlank(message = "Nome fantasia é obrigatório.")
-    @Min(value = 8, message = "Nome fantasia não pode ser menor que 8.")
-    @Max(value = 40, message = "Nome fantasia não pode ser maior que 40.")
+    @Size(min=4, max=35)
     private String fantasia;
 
     @JsonProperty(defaultValue = "razao")
     @NotBlank(message = "Razão social é obrigatório.")
-    @Min(value = 8, message = "Razão social não pode ser menor que 8.")
-    @Max(value = 40, message = "Razão social não pode ser maior que 40.")
+    @Size(min=4, max=35)
     private String razao;
+
+    @JsonProperty(defaultValue = "status")
+    private Boolean status;
 
     @JsonProperty(defaultValue = "cnpj")
     @NotBlank(message = "CNPJ é obrigatório.")
-    @Min(value = 14, message = "CNPJ não pode ser menor que 14.")
-    @Max(value = 14, message = "CNPJ não pode ser maior que 14.")
+    @Size(min=14, max=14)
     private String cnpj;
 
     @JsonProperty(defaultValue = "mac")
-    @Max(value = 20, message = "mac não pode ser maior que 14.")
+    @Size(min=4, max=35)
     private String mac;
 
     @JsonProperty(defaultValue = "diaVencimento")
-    @NotBlank(message = "dia do vencimento é obrigatório.")
+    @NotNull
     private Integer diaVencimento;
 
     @JsonProperty(defaultValue = "dataBloqueio")
-    @NotBlank(message = "data do bloqueio é obrigatório.")
-    private java.util.Date dataBloqueio;
+    @NotNull
+    private Date dataBloqueio;
 
 
     @JsonProperty(defaultValue = "dataExpiracao")
-    @NotBlank(message = "data da expiracao é obrigatório.")
-    private java.util.Date dataExpiracao;
+    @NotNull
+    private Date dataExpiracao;
 
-    @JsonProperty(defaultValue = "logradouro")
+   /* @JsonProperty(defaultValue = "logradouro")
     @NotBlank(message = "logradouro é obrigatório.")
-    @Max(value = 50, message = "logradouro não pode ser maior que 50.")
+    @Size(min=4, max=50)
     private String logradouro;
     @JsonProperty(defaultValue = "cidade")
-    @Max(value = 35, message = "cidadenão pode ser maior que 35.")
+    @Size(min=4, max=50)
     @NotBlank(message = "cidade é obrigatório.")
     private String cidade;
     @JsonProperty(defaultValue = "bairro")
-    @Max(value = 35, message = "bairro não pode ser maior que 35.")
+    @Size(min=4, max=35)
     @NotBlank(message = "bairro é obrigatório.")
     private String bairro;
     @JsonProperty(defaultValue = "cep")
-    @Max(value = 7, message = "cep não pode ser maior que 7.")
+    @Size(max=8)
     @NotBlank(message = "cep é obrigatório.")
     private String cep;
     @JsonProperty(defaultValue = "numero")
-    @Max(value = 10, message = "numero não pode ser maior que 10.")
+    @Size(max=35)
     @NotBlank(message = "numero é obrigatório.")
     private String numero;
     @JsonProperty(defaultValue = "complemento")
     private String complemento;
     @JsonProperty(defaultValue = "uf")
-    @Max(value = 2, message = "uf não pode ser maior que 2.")
+    @Size(min=2, max=2)
     @NotBlank(message = "uf é obrigatório.")
     private String uf;
 
     @JsonProperty(defaultValue = "filial_id")
+    private Long filial_id;*/
 
-    @NotBlank(message = "filial_id é obrigatório.")
-    private Long filial_id;
-
-  /*  public Long getFilial_id() {
-        return this.getId();
+    public Boolean getStatus() {
+        return status;
     }
 
-    public void setFilial_id(Long filial_id) {
-        this.filial_id = filial_id;
-    }*/
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
-    public String getLogradouro() {
+    @JsonProperty(defaultValue = "endereco_id")
+    private FilialEnderecoDtoRequest filialEndereco;
+
+    public FilialEnderecoDtoRequest getFilialEndereco() {
+        return filialEndereco;
+    }
+
+    public void setFilialEndereco(FilialEnderecoDtoRequest filialEndereco) {
+        this.filialEndereco = filialEndereco;
+    }
+
+    /*public String getLogradouro() {
         return logradouro;
     }
 
@@ -145,7 +154,7 @@ public class FilialDtoRequest extends IdentityDto {
     public void setUf(String uf) {
         this.uf = uf;
     }
-
+*/
     public String getFantasia() {
         return this.fantasia;
      }

@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 public class AuthenticationController {
     private UserAuthenticationService userAuthenticationService;
@@ -30,7 +32,7 @@ public class AuthenticationController {
 
 
     @PostMapping("api/auth")
-    public ResponseEntity<UserAuthenticateDtoRequest> autenticar(@RequestBody DadosLoginRequest dadosLoginRequest, @RequestHeader String Authorization){
+    public ResponseEntity<UserAuthenticateDtoRequest> autenticar(@Valid  @RequestBody DadosLoginRequest dadosLoginRequest, @RequestHeader String Authorization){
 
       //  var encodedPass = _passwordEncoder.encode(dadosLoginRequest.getSenha());
        // dadosLoginRequest.setSenha(encodedPass);

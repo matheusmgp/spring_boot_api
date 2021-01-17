@@ -28,12 +28,9 @@ public class CanaisService implements ICanaisService {
     }
 
     public Canais create(Canais canal) {
-       // try {
+
            return  _canaisRepository.save(canal);
-       // }catch (RuntimeException ex) {
-       //     new EntityNotCreatedException("Could not create entity");
-       //}
-      //  return canal;
+
     }
 
     public Long delete(Long id) {
@@ -43,26 +40,9 @@ public class CanaisService implements ICanaisService {
 
     public Canais update(Long id,Canais canalUpdated) {
 
-       //  Canais updatedCanal = new Canais();
-       // Canais canal =  _canaisRepository.findById(id).get();// .orElseThrow(
-               // () -> new EntityNotFoundException("ID not found "+ id));
-
-      //  Canais canal = _canaisRepository.getOne(id);
-        //if (canal == null) {
-        //    throw new Exception();
-       // }
-     //   if (canal.getId() != id) {
-      //      throw new IllegalArgumentException();
-      //  }
-
         canalUpdated.setId(id);
-       // try {
             return _canaisRepository.save(canalUpdated);
-       // }catch (RuntimeException ex) {
-           // new EntityNotUpdatedException("Could not update entity");
-       // }
 
-       // return updatedCanal;
     }
 
     public Boolean exists(Long id){

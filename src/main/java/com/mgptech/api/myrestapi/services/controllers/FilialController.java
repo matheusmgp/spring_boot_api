@@ -8,6 +8,9 @@ import com.mgptech.api.myrestapi.application.dto.request.FilialEnderecoDtoReques
 import com.mgptech.api.myrestapi.application.dto.response.FilialDtoResponse;
 import com.mgptech.api.myrestapi.application.service.FilialEnderecoService;
 import com.mgptech.api.myrestapi.domain.entities.FilialEndereco;
+import com.mgptech.api.myrestapi.domain.entities.Usuario;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotCreatedException;
+import com.mgptech.api.myrestapi.services.controllers.exceptions.ExistingEmailException;
 import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,6 +27,8 @@ import com.mgptech.api.myrestapi.application.dto.IO.FilialIO;
 import com.mgptech.api.myrestapi.application.service.FilialService;
 import com.mgptech.api.myrestapi.domain.entities.Filial;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/filial")
@@ -51,30 +56,24 @@ public class FilialController {
 	}	
 	
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Filial> add(@RequestBody FilialDtoRequest filialDtoRequest){
-		FilialEnderecoDtoRequest filialEnderecoDtoRequest = new FilialEnderecoDtoRequest();
-		filialEnderecoDtoRequest.setLogradouto(filialDtoRequest.getLogradouro());
-		filialEnderecoDtoRequest.setNumero(filialDtoRequest.getNumero());
-		filialEnderecoDtoRequest.setCidade(filialDtoRequest.getCidade());
-		filialEnderecoDtoRequest.setBairro(filialDtoRequest.getBairro());
-		filialEnderecoDtoRequest.setUf(filialDtoRequest.getUf());
-		filialEnderecoDtoRequest.setCep(filialDtoRequest.getCep());
-		if(filialDtoRequest.getComplemento() != null){
-			filialEnderecoDtoRequest.setComplemento(filialDtoRequest.getComplemento());
+    public ResponseEntity<Filial> add(@Valid  @RequestBody FilialDtoRequest filialDtoRequest){
+		Boolean cnpjExists = _filialService.cnpjExists(filialDtoRequest.getCnpj());
+		if(!cnpjExists){
+			FilialEndereco filialEnderecoModel = filialEnderecoIO.mapTo(filialDtoRequest.getFilialEndereco());
+			filialEnderecoModel.setId(0L);
+			FilialEndereco savedFilialEndereco =_filialEnderecoService.create(filialEnderecoModel);
+			Filial filialModel = filialIO.mapTo(filialDtoRequest);
+			filialModel.setStatus(true);
+			filialModel.setId(0L);
+			filialModel.setFilialEndereco(savedFilialEndereco);
+			Filial savedFilial = _filialService.create(filialModel);
+			return new ResponseEntity<>(savedFilial, HttpStatus.CREATED);
 		}
-		FilialEndereco filialEnderecoModel = filialEnderecoIO.mapTo(filialEnderecoDtoRequest);
-		FilialEndereco savedFilialEndereco =_filialEnderecoService.create(filialEnderecoModel);
-    	Filial filialModel = filialIO.mapTo(filialDtoRequest);
-		filialModel.setStatus(true);
-		filialModel.setFilialEndereco(savedFilialEndereco);
-    	Filial savedFilial = _filialService.create(filialModel);
-		//Long id = savedFilial.getId();
-		//filialEnderecoModel.setFilial(savedFilial);
 
-		return new ResponseEntity<>(savedFilial, HttpStatus.CREATED);
+		throw new EntityNotCreatedException("CNPJ já existe");
+
+
     }
-    
-   
 
 	@RequestMapping(method = RequestMethod.GET)
     public ResponseEntity<List<FilialDtoResponse>> findAll(){
@@ -84,18 +83,56 @@ public class FilialController {
 		return new ResponseEntity<>(result, HttpStatus.OK);
     }
 
-
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Filial> update(@RequestBody FilialDtoRequest filialDTORequire) throws Exception{
-    	 Filial filialModel = filialIO.mapTo(filialDTORequire);
-    	 Long id = filialModel.getId();
-    	 Filial savedFilial = _filialService.update(id,filialModel);
-		return new ResponseEntity<>(savedFilial, HttpStatus.OK);
+    public ResponseEntity<Filial> update(@Valid @RequestBody FilialDtoRequest filialDTORequest) throws Exception{
+		if(filialDTORequest.getId() > 0 || filialDTORequest.getId() != null){
+			Filial filialModel = filialIO.mapTo(filialDTORequest);
+			var filialEnderecoId = _filialEnderecoService.findById(filialDTORequest.getFilialEndereco().getId()).getId();
+			FilialEndereco filialEnderecoModel = filialEnderecoIO.mapTo(filialDTORequest.getFilialEndereco());
+
+			FilialEndereco filialEnderecoSaved = _filialEnderecoService.update(filialEnderecoId,filialEnderecoModel);
+
+
+			var oldCnpj = _filialService.findById(filialDTORequest.getId()).getCnpj();
+			var userCnpjExists = _filialService.cnpjExists(filialModel.getCnpj());
+			var newCnpj = filialModel.getCnpj();
+
+			var igual = newCnpj.equals(oldCnpj);
+
+			if(userCnpjExists && igual || !userCnpjExists){
+				Long id = filialModel.getId();
+				filialModel.setFilialEndereco(filialEnderecoSaved);
+				Filial savedFilial = _filialService.update(id,filialModel);
+				return new ResponseEntity<>(savedFilial, HttpStatus.OK);
+			}else {
+				throw new EntityNotCreatedException("CNPJ já existe");
+			}
+
+		}else {
+			throw new EntityNotCreatedException("ID NÃO INFORMADO");
+		}
     }
+
     @DeleteMapping(path = "{id}")
     public void delete(@PathVariable("id") Long id){
     	_filialService.delete(id);
     	 
     }
-	
+
+    private FilialEndereco criaFilialEndereco(FilialEnderecoDtoRequest filialEnderecoDtoRequest){
+		FilialEndereco filialEnderecoModel = new FilialEndereco();
+		filialEnderecoModel.setLogradouto(filialEnderecoDtoRequest.getLogradouto());
+		filialEnderecoModel.setNumero(filialEnderecoDtoRequest.getNumero());
+		filialEnderecoModel.setCidade(filialEnderecoDtoRequest.getCidade());
+		filialEnderecoModel.setBairro(filialEnderecoDtoRequest.getBairro());
+		filialEnderecoModel.setUf(filialEnderecoDtoRequest.getUf());
+		filialEnderecoModel.setCep(filialEnderecoDtoRequest.getCep());
+		filialEnderecoModel.setId(0L);
+
+		if(filialEnderecoDtoRequest.getComplemento() != null){
+			filialEnderecoModel.setComplemento(filialEnderecoDtoRequest.getComplemento());
+		}
+
+		return filialEnderecoModel;
+	}
 }

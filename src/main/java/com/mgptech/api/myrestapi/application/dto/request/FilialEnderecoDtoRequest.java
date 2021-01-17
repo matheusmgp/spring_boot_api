@@ -38,8 +38,8 @@ public class FilialEnderecoDtoRequest extends IdentityDto {
         return logradouro;
     }
 
-    public void setLogradouto(String logradouto) {
-        this.logradouro = logradouto;
+    public void setLogradouto(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getCidade() {

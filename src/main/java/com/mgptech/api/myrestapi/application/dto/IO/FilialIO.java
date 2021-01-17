@@ -29,6 +29,10 @@ public class FilialIO {
 				filial.setDiaVencimento( filialDtoRequire.getDiaVencimento());
 				if(filialDtoRequire.getId() != null){
 					filial.setId(filialDtoRequire.getId());
+					filial.setStatus(filialDtoRequire.getStatus());
+				}
+				if(filialDtoRequire.getMac() != null){
+					filial.setMac(filialDtoRequire.getMac());
 				}
 	        
 	            // @formatter:on

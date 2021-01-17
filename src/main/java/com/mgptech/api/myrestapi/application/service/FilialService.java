@@ -4,6 +4,7 @@
 package com.mgptech.api.myrestapi.application.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.mgptech.api.myrestapi.services.controllers.exceptions.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -53,7 +54,15 @@ public class FilialService implements IFilialService{
     public Filial update(Long id,Filial filialUpdated) {
         filialUpdated.setId(id);
         return _filialRepository.save(filialUpdated);
+    }
 
+    public Boolean cnpjExists(String cnpj){
+        var retorno = _filialRepository.findByCnpj(cnpj);
+        if(!retorno.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

@@ -33,7 +33,6 @@ public class CanaisController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-
     public ResponseEntity<CanaisDtoResponse> getById(@PathVariable(value = "id") long id){
         CanaisDtoResponse canaisDtoResponse = objectMapperUtils.mapTo(_canaisService.findById(id), CanaisDtoResponse.class);
         return new ResponseEntity<>(canaisDtoResponse, HttpStatus.OK);
@@ -49,6 +48,7 @@ public class CanaisController {
     @RequestMapping( method =  RequestMethod.POST)
     public ResponseEntity<Canais> add(@Valid @RequestBody CanaisDtoRequest canaisDtoRequire){
         Canais canalModel = canaisIO.mapTo(canaisDtoRequire);
+        canalModel.setId(0);
         Canais savedCanais = _canaisService.create(canalModel);
         return new ResponseEntity<>(savedCanais, HttpStatus.CREATED);
     }
@@ -63,13 +63,12 @@ public class CanaisController {
         Canais canalRetorno = _canaisService.findById(canaisModel.getId());
         if(canalRetorno != null){
             Long id = canaisModel.getId();
-           // canaisModel.setStatus(true);
             Canais savedCanal = _canaisService.update(id,canaisModel);
             return new ResponseEntity<>(savedCanal, HttpStatus.OK);
 
         }
 
-        return new ResponseEntity<>(null, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 
     }
 

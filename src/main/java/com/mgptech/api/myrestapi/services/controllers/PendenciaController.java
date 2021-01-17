@@ -12,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.lang.reflect.Type;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class PendenciaController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Pendencia> add(@RequestBody PendenciaDtoRequest pendenciaDtoRequest) throws Exception{
+    public ResponseEntity<Pendencia> add(@Valid  @RequestBody PendenciaDtoRequest pendenciaDtoRequest) throws Exception{
         Canais canal = _canaisService.findById(pendenciaDtoRequest.getCanal_id());
         Usuario usuario = _usuarioService.findById(pendenciaDtoRequest.getUsuario_id());
         Categoria categoria = _categoriaService.findById(pendenciaDtoRequest.getCategoria_id());
@@ -75,7 +76,7 @@ public class PendenciaController {
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Pendencia> update(@RequestBody PendenciaDtoRequest pendenciaDtoRequest) throws Exception {
+    public ResponseEntity<Pendencia> update(@Valid @RequestBody PendenciaDtoRequest pendenciaDtoRequest) throws Exception {
         Canais canal = _canaisService.findById(pendenciaDtoRequest.getCanal_id());
         Usuario usuario = _usuarioService.findById(pendenciaDtoRequest.getUsuario_id());
         Categoria categoria = _categoriaService.findById(pendenciaDtoRequest.getCategoria_id());

@@ -35,8 +35,8 @@ public class FilialEndereco  extends  BaseEntity implements Serializable {
         return logradouro;
     }
 
-    public void setLogradouto(String logradouto) {
-        this.logradouro = logradouto;
+    public void setLogradouto(String logradouro) {
+        this.logradouro = logradouro;
     }
 
     public String getCidade() {

@@ -26,6 +26,8 @@ import com.mgptech.api.myrestapi.application.service.ChamadoService;
 import com.mgptech.api.myrestapi.domain.entities.Chamado;
 import com.mgptech.api.myrestapi.services.mapper.ObjectMapperUtils;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/chamado")
 public class ChamadoController {
@@ -61,7 +63,7 @@ public class ChamadoController {
     }
 
     @RequestMapping( method =  RequestMethod.POST)
-    public ResponseEntity<Chamado> add(@RequestBody ChamadoDtoRequest chamadoDtoRequire) throws Exception{
+    public ResponseEntity<Chamado> add(@Valid @RequestBody ChamadoDtoRequest chamadoDtoRequire) throws Exception{
 	   Setor setor = _setorService.findById(chamadoDtoRequire.getSetor());
        Usuario usuario = _usuarioService.findById(chamadoDtoRequire.getUsuario());
        Filial filial = _filialService.findById(chamadoDtoRequire.getFilial());
@@ -84,7 +86,7 @@ public class ChamadoController {
     }
 
     @RequestMapping( method =  RequestMethod.PUT)
-    public ResponseEntity<Chamado> update(@RequestBody ChamadoDtoRequest chamadoDtoRequire) throws Exception {
+    public ResponseEntity<Chamado> update(@Valid @RequestBody ChamadoDtoRequest chamadoDtoRequire) throws Exception {
 
         Setor setor = _setorService.findById(chamadoDtoRequire.getSetor());
         Usuario usuario = _usuarioService.findById(chamadoDtoRequire.getUsuario());
@@ -106,8 +108,6 @@ public class ChamadoController {
         Chamado savedChamado = _chamadoService.update(id,chamadoModel);
         return new ResponseEntity<>(savedChamado, HttpStatus.OK);
     }
-
-
 
     @DeleteMapping(path = "{id}")
     public ResponseEntity<String> delete(@PathVariable("id") Long id){
